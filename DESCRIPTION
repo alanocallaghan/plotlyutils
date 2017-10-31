@@ -3,10 +3,17 @@ Title: What the Package Does (one line, title case)
 Version: 0.0.0.9000
 Authors@R: "Alan O Callaghan <alan.ocallaghan@outlook.com.com> [aut,cre]"
 Description: What the package does (one paragraph).
-Depends: R (>= 3.4.2)
+Depends: R (>= 3.4.2),
+    plotly,
+    htmlwidgets
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
-Suggests: knitr,
+Imports:
+    assertthat
+Suggests: 
+    knitr,
+    testthat,
     rmarkdown
 VignetteBuilder: knitr
+RoxygenNote: 6.0.1.9000

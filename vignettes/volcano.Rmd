@@ -8,51 +8,82 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+# Volcano plot
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+```{r}
+query <- GDCquery(project = "TCGA-GBM",
+                  data.category = "Transcriptome Profiling",
+                  data.type = "Gene Expression Quantification", 
+                  workflow.type = "HTSeq - Counts")
+GDCdownload(query)
+data <- GDCprepare(query)
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+exp <- assay(data)
 
-## Vignette Info
 
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+mart <- useDataset(dataset = "hsapiens_gene_ensembl", 
+                   mart = useMart("ENSEMBL_MART_ENSEMBL", host = "www.ensembl.org"))
 
-## Styles
+resultTable <- getBM(attributes = c("ensembl_gene_id", "hgnc_symbol"),
+                     filters    = "ensembl_gene_id",
+                     values     = rownames(exp),
+                     mart       = mart)
 
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
 
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
+resultTable <- resultTable[!duplicated(resultTable[["ensembl_gene_id"]]), ]
+resultTable <- resultTable[!is.na(resultTable[["hgnc_symbol"]]), ]
+resultTable <- resultTable[resultTable[["hgnc_symbol"]] != "", ]
+rownames(resultTable) <- resultTable[["ensembl_gene_id"]]
 
-## Figures
+exp <- exp[rownames(resultTable), ]
 
-The figure sizes have been customised so that you can easily put two images side-by-side. 
+voomed <- limma::voom(exp)
 
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+ind_not_na <- !is.na(colData(data)$subtype_IDH.status)
+data <- data[, ind_not_na]
+voomed <- voomed[, ind_not_na]
+
+design <- model.matrix(~ 0 + colData(data)$subtype_IDH.status)
+colnames(design) <- gsub("colData(data)$subtype_IDH.status", "", 
+    colnames(design), fixed=TRUE)
+
+fit <- lmFit(voomed, design=design)
+
+contrasts <- makeContrasts("Mutant-WT", levels=design)
+
+fit <- contrasts.fit(fit, contrasts)
+
+ebayes <- eBayes(fit)
+tt <- topTable(ebayes, number=nrow(ebayes))
+
+tt$Symbol <- resultTable[rownames(tt), "hgnc_symbol"]
+
+
+tt$Links <- paste0(
+    "https://www.ncbi.nlm.nih.gov/gene?term=(",tt$Symbol, 
+    "[gene])%20AND%20(Homo%20sapiens[orgn])%20AND%20alive[prop]%20NOT%20newentry[gene]&sort=weight")
+
+
+tt$Text <- paste0(
+    "log<sub>2</sub>(fold change): ", format(tt$logFC, digits=3), "<br>",
+    "Adjusted p-value: ", format(tt$adj.P.Val, digits=3), "<br>",
+    "Gene symbol: ", tt$Symbol
+    )
+
+tt$Group <- ifelse (tt$adj.P.Val < 0.05, 
+    ifelse(tt$logFC > 0, "Up-regulated", "Down-regulated"), 
+    "Not sig.")
+
+linked_scatterplot(
+    x=tt$logFC,
+    xlab = "log<sub>2</sub>(fold-change)",
+    y=-log10(tt$adj.P.Val),
+    ylab = "-log<sub>10</sub>(FDR-adjusted p-value)",
+    xlim=c(-max(abs(tt$logFC)), max(abs(tt$logFC))) * 1.1,
+    text=tt$Text,
+    links=tt$Links,
+    groups=tt$Group,
+    title="Glioblastoma - IDH1 mutant vs wt",
+    colors=c("#0000ff", "#000000", "#ff0000"))
+
 ```
-
-You can enable figure captions by `fig_caption: yes` in YAML:
-
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
-
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
-```
-
-Also a quote using `>`:
-
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
