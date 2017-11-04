@@ -22,6 +22,7 @@ vignette: >
 suppressPackageStartupMessages(library("SummarizedExperiment"))
 suppressPackageStartupMessages(library("magrittr"))
 suppressPackageStartupMessages(library("EdinbrPlotly"))
+suppressPackageStartupMessages(library("limma"))
 ```
 ```{r, fig.caption = "Density plot of counts"}
 
