@@ -1,89 +1,32 @@
 ---
-title: "Vignette Title"
-author: "Vignette Author"
+title: "Scatter plot with links"
+author: "Alan O'Callaghan"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output:
+  rmarkdown::html_vignette:
+    fig_caption: yes
+    self_contained: yes
+    toc: true
+    fig_width: 10
+    fig_height: 6
+    depth: 3  # upto three depths of headings (specified by #, ## and ###)  
+    number_sections: true  ## if you want number sections at each table header
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 # Volcano plot
-
-```{r}
-query <- GDCquery(project = "TCGA-GBM",
-                  data.category = "Transcriptome Profiling",
-                  data.type = "Gene Expression Quantification", 
-                  workflow.type = "HTSeq - Counts")
-GDCdownload(query)
-data <- GDCprepare(query)
-
-exp <- assay(data)
-
-
-mart <- useDataset(dataset = "hsapiens_gene_ensembl", 
-                   mart = useMart("ENSEMBL_MART_ENSEMBL", host = "www.ensembl.org"))
-
-resultTable <- getBM(attributes = c("ensembl_gene_id", "hgnc_symbol"),
-                     filters    = "ensembl_gene_id",
-                     values     = rownames(exp),
-                     mart       = mart)
-
-
-resultTable <- resultTable[!duplicated(resultTable[["ensembl_gene_id"]]), ]
-resultTable <- resultTable[!is.na(resultTable[["hgnc_symbol"]]), ]
-resultTable <- resultTable[resultTable[["hgnc_symbol"]] != "", ]
-rownames(resultTable) <- resultTable[["ensembl_gene_id"]]
-
-exp <- exp[rownames(resultTable), ]
-
-voomed <- limma::voom(exp)
-
-ind_not_na <- !is.na(colData(data)$subtype_IDH.status)
-data <- data[, ind_not_na]
-voomed <- voomed[, ind_not_na]
-
-design <- model.matrix(~ 0 + colData(data)$subtype_IDH.status)
-colnames(design) <- gsub("colData(data)$subtype_IDH.status", "", 
-    colnames(design), fixed=TRUE)
-
-fit <- lmFit(voomed, design=design)
-
-contrasts <- makeContrasts("Mutant-WT", levels=design)
-
-fit <- contrasts.fit(fit, contrasts)
-
-ebayes <- eBayes(fit)
-tt <- topTable(ebayes, number=nrow(ebayes))
-
-tt$Symbol <- resultTable[rownames(tt), "hgnc_symbol"]
-
-
-tt$Links <- paste0(
-    "https://www.ncbi.nlm.nih.gov/gene?term=(",tt$Symbol, 
-    "[gene])%20AND%20(Homo%20sapiens[orgn])%20AND%20alive[prop]%20NOT%20newentry[gene]&sort=weight")
-
-
-tt$Text <- paste0(
-    "log<sub>2</sub>(fold change): ", format(tt$logFC, digits=3), "<br>",
-    "Adjusted p-value: ", format(tt$adj.P.Val, digits=3), "<br>",
-    "Gene symbol: ", tt$Symbol
-    )
-
-tt$Group <- ifelse (tt$adj.P.Val < 0.05, 
-    ifelse(tt$logFC > 0, "Up-regulated", "Down-regulated"), 
-    "Not sig.")
-
+```{r, fig.caption="Volcano plot (-log10(adjusted p-value) vs log2(fold change) from linear models"}
 linked_scatterplot(
-    x=tt$logFC,
+    x = GBMtopTable[["logFC"]],
     xlab = "log<sub>2</sub>(fold-change)",
-    y=-log10(tt$adj.P.Val),
+    y = -log10(GBMtopTable[["adj.P.Val"]]),
     ylab = "-log<sub>10</sub>(FDR-adjusted p-value)",
-    xlim=c(-max(abs(tt$logFC)), max(abs(tt$logFC))) * 1.1,
-    text=tt$Text,
-    links=tt$Links,
-    groups=tt$Group,
-    title="Glioblastoma - IDH1 mutant vs wt",
-    colors=c("#0000ff", "#000000", "#ff0000"))
-
+    xlim = c(-max(abs(GBMtopTable[["logFC"]])), max(abs(GBMtopTable[["logFC"]]))) * 1.1,
+    text = GBMtopTable[["Text"]],
+    links = GBMtopTable[["Links"]],
+    groups = GBMtopTable[["Group"]],
+    title = "Glioblastoma - IDH1 mutant vs wt",
+    colors = c("#0000ff", "#000000", "#ff0000"))
 ```
