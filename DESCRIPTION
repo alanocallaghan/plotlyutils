@@ -1,14 +1,15 @@
 Package: EdinbrPlotly
-Title: What the Package Does (one line, title case)
+Title: A talk for EdinbR
 Version: 0.0.0.9000
-Authors@R: "Alan O Callaghan <alan.ocallaghan@outlook.com.com> [aut,cre]"
-Description: What the package does (one paragraph).
+Authors@R: person("Alan", "O'Callaghan", email = "alan.ocallaghan@outlook.com",
+                  role = c("aut", "cre"))
+Description: A talk for EdinbR
 Depends: R (>= 3.4.2),
     plotly,
     htmlwidgets,
     iheatmapr,
     heatmaply
-License: What license is it under?
+License: GPL v3
 Encoding: UTF-8
 LazyData: true
 Imports:

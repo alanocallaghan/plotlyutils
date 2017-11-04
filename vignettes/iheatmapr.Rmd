@@ -10,7 +10,6 @@ output:
     fig_width: 10
     fig_height: 6
     depth: 3  # upto three depths of headings (specified by #, ## and ###)  
-    number_sections: true  ## if you want number sections at each table header
 
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
@@ -19,7 +18,7 @@ vignette: >
 ---
 
 ## iheatmapr
-```{r, echo=FALSE}
+```{r, echo = FALSE}
 library("iheatmapr")
 library("datasets")
 library("reshape2")
