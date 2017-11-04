@@ -20,6 +20,8 @@ vignette: >
 
 ```{r, echo = FALSE}
 library("SummarizedExperiment")
+library("magrittr")
+library("EdinbrPlotly")
 ```
 ```{r, fig.caption = "Density plot of counts"}
 

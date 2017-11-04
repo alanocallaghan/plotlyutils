@@ -5,7 +5,8 @@
 \title{linked_scatterplot}
 \usage{
 linked_scatterplot(x, y, links, groups = rep("1", length(x)), text = rep("",
-  length(x)), title = "",
+  length(x)), title = "", xlab = "", xlim = range(x, na.rm = TRUE) * 1.1,
+  ylim = range(y, na.rm = TRUE) * 1.1, ylab = "",
   colors = RColorBrewer::brewer.pal(length(unique(groups)), "Set2"))
 }
 \description{

@@ -9,6 +9,7 @@
 #'  rep("https://www.google.com", 10), 
 #'  groups=sample(letters[1:2], 10, replace=TRUE))
 #' @importFrom assertthat assert_that
+#' @export
 linked_scatterplot <- function(x, 
         y, 
         links, 
