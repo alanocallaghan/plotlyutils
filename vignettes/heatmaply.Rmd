@@ -19,6 +19,7 @@ vignette: >
 
 ```{r, echo = FALSE}
 library("SummarizedExperiment")
+library("EdinbrPlotly")
 ```
 
 ```{r, fig.caption = "Correlation heatmap"}
@@ -29,7 +30,7 @@ raw_median_mat <- apply(raw_mat, 1, function(row) {
 })
 heatmaply_cor(cor(t(raw_median_mat)),
     plot_method="plotly",
-    showTickLabels = c(FALSE, FALSE))
+    showTickLabels = c(FALSE, FALSE)  )
 ```
 
 ```{r, fig.caption = "Correlation heatmap"}

@@ -1,6 +1,17 @@
+#' Density plot using plotly
+#' 
+#' Creates a density plot of all columns of a matrix or data.frame like 
+#' structure.
+#' 
+#' @return A plotly htmlwidget
+#' 
 #' @examples 
 #' plotly_density(iris[, -5], title="Density plot of Iris dataset",
 #'      xlab = "Value")
+#' 
+#' plotly_density(voomed_GBM$E, title="Density plot of voomed GBM data",
+#'      xlab = "Expression level")
+#' @importFrom magrittr %>%
 #' @export
 plotly_density <- function(mat, title = "", xlab = "",
         palette = viridis) {
