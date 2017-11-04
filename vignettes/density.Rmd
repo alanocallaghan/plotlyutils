@@ -37,7 +37,7 @@ plotly_density(
 plotly_density(
     voomed_GBM$E, 
     palette=colorspace::rainbow_hcl,
-    xlab = "log<sub>2</sub>(reads + 0.5)") %>%
+    xlab = "log<sub>2</sub>(normalised counts per million)") %>%
     layout(showlegend = FALSE)
 
 
