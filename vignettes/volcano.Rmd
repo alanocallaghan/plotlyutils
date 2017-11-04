@@ -18,7 +18,7 @@ vignette: >
 # Volcano plot
 
 ```{r}
-library("EdinbrPlotly")
+suppressPackageStartupMessages(library("EdinbrPlotly"))
 ```
 
 ```{r, fig.caption = "Volcano plot (-log10(adjusted p-value) vs log2(fold change) from linear models"}

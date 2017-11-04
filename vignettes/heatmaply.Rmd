@@ -18,8 +18,8 @@ vignette: >
 ---
 
 ```{r, echo = FALSE}
-library("SummarizedExperiment")
-library("EdinbrPlotly")
+suppressPackageStartupMessages(library("SummarizedExperiment"))
+suppressPackageStartupMessages(library("EdinbrPlotly"))
 ```
 
 ```{r, fig.caption = "Correlation heatmap"}
