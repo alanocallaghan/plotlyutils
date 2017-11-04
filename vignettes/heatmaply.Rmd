@@ -17,20 +17,22 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, echo=FALSE}
+```{r, echo = FALSE}
 library("SummarizedExperiment")
 ```
 
-```{r, fig.caption="Correlation heatmap"}
+```{r, fig.caption = "Correlation heatmap"}
 
 raw_mat <- assay(GBMdata)
 raw_median_mat <- apply(raw_mat, 1, function(row) {
     row - median(row)
 })
-heatmaply_cor(cor(t(raw_median_mat)), plot_method="plotly")
+heatmaply_cor(cor(t(raw_median_mat)),
+    plot_method="plotly",
+    showTickLabels = c(FALSE, FALSE))
 ```
 
-```{r, fig.caption="Correlation heatmap"}
+```{r, fig.caption = "Correlation heatmap"}
 voom_mat <- voomed_GBM$E
 voom_median_mat <- apply(voom_mat, 1, function(row) {
     row - median(row)
@@ -38,5 +40,6 @@ voom_median_mat <- apply(voom_mat, 1, function(row) {
 
 heatmaply_cor(cor(t(voom_median_mat)),
     plot_method="plotly",
-    distfun = function(x) as.dist(1 - cor(t(x))))
+    distfun = function(x) as.dist(1 - cor(t(x))),
+    showTickLabels = c(FALSE, FALSE))
 ```
