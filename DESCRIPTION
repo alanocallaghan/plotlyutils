@@ -5,15 +5,23 @@ Authors@R: "Alan O Callaghan <alan.ocallaghan@outlook.com.com> [aut,cre]"
 Description: What the package does (one paragraph).
 Depends: R (>= 3.4.2),
     plotly,
-    htmlwidgets
+    htmlwidgets,
+    iheatmapr,
+    heatmaply
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 Imports:
-    assertthat
+    assertthat,
+    colorspace
 Suggests: 
     knitr,
     testthat,
-    rmarkdown
+    rmarkdown,
+    TCGAbiolinks,
+    gdata,
+    SummarizedExperiment,
+    edgeR,
+    pkgdown
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1.9000
