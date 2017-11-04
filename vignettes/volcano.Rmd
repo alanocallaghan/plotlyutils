@@ -16,7 +16,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 # Volcano plot
-```{r, fig.caption="Volcano plot (-log10(adjusted p-value) vs log2(fold change) from linear models"}
+```{r, fig.caption = "Volcano plot (-log10(adjusted p-value) vs log2(fold change) from linear models"}
 linked_scatterplot(
     x = GBMtopTable[["logFC"]],
     xlab = "log<sub>2</sub>(fold-change)",

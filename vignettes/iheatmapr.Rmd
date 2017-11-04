@@ -33,7 +33,7 @@ patient_min_conc <- apply(Indometh_matrix,1,min)
 patient_groups <- c("A","A","B","A","B","A") # Arbitrary groups
 ```
 
-```{r, fig.caption="iheatmapr vignette example"}
+```{r, fig.caption = "iheatmapr vignette example"}
 iheatmap(Indometh_patient_cor, 
          cluster_cols = "hclust", 
          cluster_rows = "hclust",

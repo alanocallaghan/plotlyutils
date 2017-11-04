@@ -18,7 +18,7 @@ vignette: >
 
 ## Density plots
 
-```{r, echo=FALSE}
+```{r, echo = FALSE}
 library("SummarizedExperiment")
 ```
 ```{r, fig.caption = "Density plot of counts"}
