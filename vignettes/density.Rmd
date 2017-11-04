@@ -19,9 +19,9 @@ vignette: >
 ## Density plots
 
 ```{r, echo = FALSE}
-library("SummarizedExperiment")
-library("magrittr")
-library("EdinbrPlotly")
+suppressPackageStartupMessages(library("SummarizedExperiment"))
+suppressPackageStartupMessages(library("magrittr"))
+suppressPackageStartupMessages(library("EdinbrPlotly"))
 ```
 ```{r, fig.caption = "Density plot of counts"}
 
