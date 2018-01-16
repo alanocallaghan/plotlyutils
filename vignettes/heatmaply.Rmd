@@ -1,5 +1,5 @@
 ---
-title: "heatmaply"
+title: "3. heatmaply"
 author: "Alan O'Callaghan"
 date: "`r Sys.Date()`"
 output:
@@ -19,7 +19,7 @@ vignette: >
 
 ```{r, echo = FALSE}
 suppressPackageStartupMessages(library("SummarizedExperiment"))
-suppressPackageStartupMessages(library("EdinbrPlotly"))
+suppressPackageStartupMessages(library("plotlytalk"))
 ```
 
 ```{r, fig.caption = "Correlation heatmap"}
