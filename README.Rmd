@@ -1,0 +1,20 @@
+---
+title: "Scatter plot with links"
+author: "Alan O'Callaghan"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    fig_caption: yes
+    self_contained: yes
+    toc: true
+    fig_width: 10
+    fig_height: 6
+    depth: 3  # upto three depths of headings (specified by #, ## and ###)  
+---
+plotlytalk
+============
+
+This package contains a talk and related functions for an Edinbr meeting.
+
+Outline
+-------

@@ -1,8 +1,9 @@
-Package: EdinbrPlotly
-Title: A talk for EdinbR
+Package: plotlytalk
+Title: A talk about plotly
 Version: 0.0.0.9000
-Authors@R: person("Alan", "O'Callaghan", email = "alan.ocallaghan@outlook.com",
-                  role = c("aut", "cre"))
+Authors@R: person("Alan", "O'Callaghan", 
+    email = "alan.ocallaghan@outlook.com",
+    role = c("aut", "cre"))
 Description: A talk for EdinbR
 Depends: R (>= 3.4.2),
     plotly,
@@ -15,7 +16,8 @@ LazyData: true
 Imports:
     assertthat,
     colorspace,
-    magrittr
+    magrittr,
+    htmlwidgets
 Suggests: 
     knitr,
     testthat,

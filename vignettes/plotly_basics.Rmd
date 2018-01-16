@@ -1,0 +1,85 @@
+---
+title: "Plotly basics"
+author: "Alan O'Callaghan"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    fig_caption: yes
+    self_contained: yes
+    toc: true
+    fig_width: 10
+    fig_height: 6
+    depth: 3  # upto three depths of headings (specified by #, ## and ###)  
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo=FALSE}
+suppressPackageStartupMessages(library("EdinbrPlotly"))
+```
+
+# ggplotly
+
+## Scatterplot
+```{r}
+g <- ggplot(mpg, aes(displ, hwy, colour = class)) + 
+  geom_point()
+print(g)
+ggplotly(g)
+```
+
+
+## Bar chart
+```{r}
+g <- ggplot(mpg, aes(class))
+g <- g + geom_bar(aes(fill=drv))
+print(g)
+
+ggplotly(g)
+```
+
+## Boxplot
+```{r}
+g <- ggplot(mpg, aes(class, hwy))
+g <- g + geom_boxplot()
+print(g)
+ggplotly(g)
+```
+
+
+# plotly
+
+## Scatterplot
+```{r}
+head(GBMtopTable)
+GBMtopTable$pval <- -log10(GBMtopTable$adj.P.Val)
+plot_ly(GBMtopTable, x = ~logFC, y = ~pval, type = "scatter", mode="markers")
+```
+
+## 3D scatterplot 
+```{r}
+df <- data.frame(z = rnorm(100))
+df$y <- df$z * 1.5 + rnorm(100, 1, 0.5)
+df$x <- df$y * 3 + rnorm(100, 1, 5)
+plot_ly(df, 
+    x = ~ x, 
+    y = ~ y, 
+    z = ~ z, 
+    type = "scatter3d", 
+    mode = "markers", 
+    marker = list(size=2))
+```
+
+
+
+## Boxplot
+
+```{r}
+print(plotly_boxplot)
+
+plotly_boxplot(iris[, -5])
+```
+
+
