@@ -1,5 +1,5 @@
 #' @export
-plotly_boxplot <- function(x, 
+plotly_boxplot <- function(x,
         box_hoverinfo = FALSE,
         colors = RColorBrewer::brewer.pal(ncol(x), "Paired")
         ) {
@@ -12,10 +12,10 @@ plotly_boxplot <- function(x,
         col <- colnames(x)[[i]]
         col_num <- col_n[[i]]
         col_num_jitter <- col_num + runif(nrow(x), -0.25, 0.25)
-        p <- p %>% 
+        p <- p %>%
             add_trace(
-                x = col_num, 
-                y = x[, col], 
+                x = col_num,
+                y = x[, col],
                 name = col,
                 legendgroup = col,
                 marker = list(color = colors[[col]]),
@@ -25,10 +25,10 @@ plotly_boxplot <- function(x,
             add_trace(
                 x = col_num_jitter,
                 y = x[, col],
-                text = rownames(x), 
+                text = rownames(x),
                 name = col,
                 legendgroup = col,
-                type = "scatter", 
+                type = "scatter",
                 mode = "markers",
                 hoverinfo = "x+y+name+text",
                 marker = list(color=colors[[col]]),

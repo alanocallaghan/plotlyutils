@@ -1,5 +1,5 @@
 ---
-title: "iheatmapr"
+title: "4. iheatmapr"
 author: "Alan O'Callaghan"
 date: "`r Sys.Date()`"
 output:

@@ -1,5 +1,5 @@
 ---
-title: "Scatter plot with links"
+title: "4. Scatter plot with links"
 author: "Alan O'Callaghan"
 date: "`r Sys.Date()`"
 output:
@@ -18,7 +18,7 @@ vignette: >
 # Volcano plot
 
 ```{r}
-suppressPackageStartupMessages(library("EdinbrPlotly"))
+suppressPackageStartupMessages(library("plotlytalk"))
 ```
 
 ```{r, fig.caption = "Volcano plot (-log10(adjusted p-value) vs log2(fold change) from linear models"}

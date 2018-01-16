@@ -1,5 +1,5 @@
 ---
-title: "Density plots"
+title: "2. Density plots"
 author: "Alan O'Callaghan"
 date: "`r Sys.Date()`"
 output:
@@ -21,7 +21,7 @@ vignette: >
 ```{r, echo = FALSE}
 suppressPackageStartupMessages(library("SummarizedExperiment"))
 suppressPackageStartupMessages(library("magrittr"))
-suppressPackageStartupMessages(library("EdinbrPlotly"))
+suppressPackageStartupMessages(library("plotlytalk"))
 suppressPackageStartupMessages(library("limma"))
 ```
 ```{r, fig.caption = "Density plot of counts"}

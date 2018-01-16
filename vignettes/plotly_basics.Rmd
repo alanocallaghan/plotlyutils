@@ -1,5 +1,5 @@
 ---
-title: "Plotly basics"
+title: "1. Plotly basics"
 author: "Alan O'Callaghan"
 date: "`r Sys.Date()`"
 output:
@@ -17,7 +17,7 @@ vignette: >
 ---
 
 ```{r, echo=FALSE}
-suppressPackageStartupMessages(library("EdinbrPlotly"))
+suppressPackageStartupMessages(library("plotlytalk"))
 ```
 
 # ggplotly
