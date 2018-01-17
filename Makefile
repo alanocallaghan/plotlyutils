@@ -14,3 +14,6 @@ document:
 
 install:
 	R --no-save --slave -e 'devtools::install()'
+
+test:
+	R --no-save --slave -e 'devtools::test()'

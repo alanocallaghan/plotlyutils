@@ -9,13 +9,30 @@ linked_scatterplot(x, y, links, groups = rep("1", length(x)), text = rep("",
   ylim = range(y, na.rm = TRUE) * 1.1, ylab = "",
   colors = RColorBrewer::brewer.pal(length(unique(groups)), "Set2"))
 }
+\arguments{
+\item{x}{x values}
+
+\item{y}{y values}
+
+\item{groups}{Groups to color the points by.}
+
+\item{text}{Hovertext for the points}
+
+\item{title}{Plot title}
+
+\item{xlab, ylab}{X/Y axis title}
+
+\item{xlim, ylim}{Range of X/Y axis}
+
+\item{colors}{Colors to use for the groups}
+}
 \description{
 A scatterplot with links
 }
 \examples{
 linked_scatterplot(
- 1:10, 
- 1:10, 
- rep("https://www.google.com", 10), 
+ 1:10,
+ 1:10,
+ rep("https://www.google.com", 10),
  groups=sample(letters[1:2], 10, replace=TRUE))
 }

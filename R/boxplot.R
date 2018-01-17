@@ -1,3 +1,10 @@
+#' A boxplot with jittered points
+#' @param x A data.frame
+#' @param box_hoverinfo Show hoverinfo for the boxplot trace? (logical)
+#' @param colors The colors to be used for the x-axis groups
+#' @return A plotly object
+#' @examples
+#'  plotly_boxplot(iris[, -5])
 #' @export
 plotly_boxplot <- function(x,
         box_hoverinfo = FALSE,
