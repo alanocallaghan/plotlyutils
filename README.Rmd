@@ -76,7 +76,7 @@ linked_scatterplot(
     links = tt[["Links"]],
     groups = tt[["Group"]],
     title = "Glioblastoma - IDH1 mutant vs wt",
-    colors = c("#0000ff", "#000000", "#ff0000"))
+    colours = c("#0000ff", "#000000", "#ff0000"))
 ```
 
 

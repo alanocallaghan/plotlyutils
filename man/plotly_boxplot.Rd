@@ -5,14 +5,14 @@
 \title{A boxplot with jittered points}
 \usage{
 plotly_boxplot(x, box_hoverinfo = FALSE,
-  colors = RColorBrewer::brewer.pal(ncol(x), "Paired"))
+  colours = RColorBrewer::brewer.pal(ncol(x), "Paired"))
 }
 \arguments{
 \item{x}{A data.frame}
 
 \item{box_hoverinfo}{Show hoverinfo for the boxplot trace? (logical)}
 
-\item{colors}{The colors to be used for the x-axis groups}
+\item{colours}{The colours to be used for the x-axis groups}
 }
 \value{
 A plotly object

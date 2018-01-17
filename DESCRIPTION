@@ -27,6 +27,7 @@ Suggests:
     SummarizedExperiment,
     edgeR,
     pkgdown,
-    covr
+    covr,
+    iheatmapr
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1.9000

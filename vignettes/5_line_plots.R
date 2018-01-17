@@ -10,3 +10,6 @@ df[["seq"]] <- 1:50
 
 df %>% plot_ly(x = ~seq, y = ~b, type = "scatter", mode = "lines")
 
+## ------------------------------------------------------------------------
+df %>% dropdown_lineplot(x="seq", yvars = letters)
+

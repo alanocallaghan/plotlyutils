@@ -23,27 +23,39 @@ GBMtopTable$pval <- -log10(GBMtopTable$adj.P.Val)
 ```
 
 ```{r}
-plot_ly(GBMtopTable, 
+set.seed(42)
+tt <- GBMtopTable[sample(seq_len(nrow(GBMtopTable)), 1000), ]
+title <- "Glioblastoma - IDH1 mutant vs wt"
+xtitle <- "log<sub>2</sub>(fold-change)"
+ytitle <- "-log<sub>10</sub>(FDR-adjusted p-value)"
+colours <- c("#0000ff", "#000000", "#ff0000")
+
+plot_ly(tt, 
     x = ~logFC, 
-    y = ~-log10(P.Value), 
+    y = ~-log10(P.Value),
+    color = ~ Group,  
     text = ~ Symbol,
     hoverinfo = "x+y+text",
     type = "scatter", 
-    mode = "markers")
+    mode = "markers") %>%
+    layout(title = "Glioblastoma - IDH1 mutant vs wt",
+        xaxis = list(title = xtitle),
+        yaxis = list(title = ytitle))
 ```
 
 ```{r}
 linked_scatterplot(
-    x = GBMtopTable[["logFC"]],
-    xlab = "log<sub>2</sub>(fold-change)",
-    y = -log10(GBMtopTable[["adj.P.Val"]]),
-    ylab = "-log<sub>10</sub>(FDR-adjusted p-value)",
-    xlim = c(-max(abs(GBMtopTable[["logFC"]])), max(abs(GBMtopTable[["logFC"]]))) * 1.1,
-    text = GBMtopTable[["Text"]],
-    links = GBMtopTable[["Links"]],
-    groups = GBMtopTable[["Group"]],
-    title = "Glioblastoma - IDH1 mutant vs wt",
-    colors = c("#0000ff", "#000000", "#ff0000"))
+    x = tt[["logFC"]],
+    xlab = xtitle,
+    y = -log10(tt[["adj.P.Val"]]),
+    ylab = ytitle,
+    xlim = c(-max(abs(tt[["logFC"]])), max(abs(tt[["logFC"]]))) * 1.1,
+    text = tt[["Text"]],
+    links = tt[["Links"]],
+    groups = tt[["Group"]],
+    title = title,
+    colours = colours)
+
 ```
 
 

@@ -24,7 +24,7 @@ function linked_scatterplot(x, el) {
         text: text,
         hoverinfo: "text",
         mode: "markers",
-        marker: {color: x.colors[i]}
+        marker: {color: x.colours[i]}
       });
     }
     var layout = {
@@ -53,7 +53,7 @@ function linked_scatterplot(x, el) {
 };
 
 function openInNewTab(url) {
-  var win = window.open(url, '_blank');
+  var win = window.open(url, "_blank");
   win.focus();
 }
 
