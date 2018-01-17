@@ -1,7 +1,5 @@
 ---
-title: "4. Scatter plot with links"
-author: "Alan O'Callaghan"
-date: "`r Sys.Date()`"
+title: "9. Scatter plot with links"
 output:
   rmarkdown::html_vignette:
     fig_caption: yes
@@ -15,13 +13,26 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-# Volcano plot
 
-```{r}
+```{r, echo=FALSE}
 suppressPackageStartupMessages(library("plotlytalk"))
 ```
+```{r, eval=FALSE, echo=FALSE}
+head(GBMtopTable)
+GBMtopTable$pval <- -log10(GBMtopTable$adj.P.Val)
+```
 
-```{r, fig.caption = "Volcano plot (-log10(adjusted p-value) vs log2(fold change) from linear models"}
+```{r}
+plot_ly(GBMtopTable, 
+    x = ~logFC, 
+    y = ~-log10(P.Value), 
+    text = ~ Symbol,
+    hoverinfo = "x+y+text",
+    type = "scatter", 
+    mode = "markers")
+```
+
+```{r}
 linked_scatterplot(
     x = GBMtopTable[["logFC"]],
     xlab = "log<sub>2</sub>(fold-change)",
@@ -34,3 +45,5 @@ linked_scatterplot(
     title = "Glioblastoma - IDH1 mutant vs wt",
     colors = c("#0000ff", "#000000", "#ff0000"))
 ```
+
+

@@ -1,7 +1,5 @@
 ---
-title: "3. heatmaply"
-author: "Alan O'Callaghan"
-date: "`r Sys.Date()`"
+title: "7. heatmaply"
 output:
   rmarkdown::html_vignette:
     fig_caption: yes
@@ -24,21 +22,24 @@ suppressPackageStartupMessages(library("plotlytalk"))
 
 ```{r, fig.caption = "Correlation heatmap"}
 
+gene_signature <- c("ALDOB",
+    "ENO1",
+    "GALM",
+    "GAPDH",
+    "HK2",
+    "HK3",
+    "LDHA",
+    "LDHB",
+    "PKLR")
 raw_mat <- assay(GBMdata)
 raw_median_mat <- apply(raw_mat, 1, function(row) {
     row - median(row)
 })
-heatmaply_cor(cor(t(raw_median_mat)),
-    showticklabels = c(FALSE, FALSE)  )
+heatmaply_cor(cor(t(raw_median_mat[, gene_signature])),
+    showticklabels = c(FALSE, FALSE))
 ```
 
-```{r, fig.caption = "Correlation heatmap"}
-voom_mat <- voomed_GBM$E
-voom_median_mat <- apply(voom_mat, 1, function(row) {
-    row - median(row)
-})
-
-heatmaply_cor(cor(t(voom_median_mat)),
-    distfun = function(x) as.dist(1 - cor(t(x))),
-    showticklabels = c(FALSE, FALSE))
+```{r}
+heatmaply(raw_median_mat[, gene_signature],
+    showticklabels = c(TRUE, FALSE))
 ```

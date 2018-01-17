@@ -1,7 +1,5 @@
 ---
-title: "4. iheatmapr"
-author: "Alan O'Callaghan"
-date: "`r Sys.Date()`"
+title: "8. iheatmapr"
 output:
   rmarkdown::html_vignette:
     fig_caption: yes
@@ -17,7 +15,6 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-## iheatmapr
 ```{r, echo = FALSE}
 suppressPackageStartupMessages(library("iheatmapr"))
 suppressPackageStartupMessages(library("datasets"))

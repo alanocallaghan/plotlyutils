@@ -1,7 +1,5 @@
 ---
-title: "1. Plotly basics"
-author: "Alan O'Callaghan"
-date: "`r Sys.Date()`"
+title: "2. Scatter plots"
 output:
   rmarkdown::html_vignette:
     fig_caption: yes
@@ -20,9 +18,6 @@ vignette: >
 suppressPackageStartupMessages(library("plotlytalk"))
 ```
 
-# ggplotly
-
-## Scatterplot
 ```{r}
 g <- ggplot(mpg, aes(displ, hwy, colour = class)) + 
   geom_point()
@@ -30,33 +25,6 @@ print(g)
 ggplotly(g)
 ```
 
-
-## Bar chart
-```{r}
-g <- ggplot(mpg, aes(class))
-g <- g + geom_bar(aes(fill=drv))
-print(g)
-
-ggplotly(g)
-```
-
-## Boxplot
-```{r}
-g <- ggplot(mpg, aes(class, hwy))
-g <- g + geom_boxplot()
-print(g)
-ggplotly(g)
-```
-
-
-# plotly
-
-## Scatterplot
-```{r}
-head(GBMtopTable)
-GBMtopTable$pval <- -log10(GBMtopTable$adj.P.Val)
-plot_ly(GBMtopTable, x = ~logFC, y = ~pval, type = "scatter", mode="markers")
-```
 
 ## 3D scatterplot 
 ```{r}
@@ -71,15 +39,4 @@ plot_ly(df,
     mode = "markers", 
     marker = list(size=2))
 ```
-
-
-
-## Boxplot
-
-```{r}
-print(plotly_boxplot)
-
-plotly_boxplot(iris[, -5])
-```
-
 

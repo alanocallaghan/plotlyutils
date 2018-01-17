@@ -1,7 +1,5 @@
 ---
-title: "2. Density plots"
-author: "Alan O'Callaghan"
-date: "`r Sys.Date()`"
+title: "6. Density plots"
 output:
   rmarkdown::html_vignette:
     fig_caption: yes
@@ -16,14 +14,15 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-## Density plots
-
 ```{r, echo = FALSE}
 suppressPackageStartupMessages(library("SummarizedExperiment"))
 suppressPackageStartupMessages(library("magrittr"))
 suppressPackageStartupMessages(library("plotlytalk"))
 suppressPackageStartupMessages(library("limma"))
 ```
+
+
+
 ```{r, fig.caption = "Density plot of counts"}
 
 plotly_density(

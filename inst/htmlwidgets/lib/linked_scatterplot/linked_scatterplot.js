@@ -27,7 +27,6 @@ function linked_scatterplot(x, el) {
         marker: {color: x.colors[i]}
       });
     }
-    console.log(x.xlim);
     var layout = {
       title: x.title, 
       hovermode: "closest",
@@ -46,12 +45,17 @@ function linked_scatterplot(x, el) {
           for(var i=0; i < data.points.length; i++){
             var pn = data.points[i].pointNumber;
             var link = data.points[i].data.links[data.points[i].pointNumber];
-            window.location = link;
+            openInNewTab(link);
           };
 
           Plotly.restyle(el.id, update);
         })
 };
+
+function openInNewTab(url) {
+  var win = window.open(url, '_blank');
+  win.focus();
+}
 
 
 function onlyUnique(value, index, self) { 
