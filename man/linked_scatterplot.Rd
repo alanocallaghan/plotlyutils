@@ -7,7 +7,7 @@
 linked_scatterplot(x, y, links, groups = rep("1", length(x)), text = rep("",
   length(x)), title = "", xlab = "", xlim = range(x, na.rm = TRUE) * 1.1,
   ylim = range(y, na.rm = TRUE) * 1.1, ylab = "",
-  colors = RColorBrewer::brewer.pal(length(unique(groups)), "Set2"))
+  colours = RColorBrewer::brewer.pal(length(unique(groups)), "Set2"))
 }
 \arguments{
 \item{x}{x values}
@@ -24,7 +24,7 @@ linked_scatterplot(x, y, links, groups = rep("1", length(x)), text = rep("",
 
 \item{xlim, ylim}{Range of X/Y axis}
 
-\item{colors}{Colors to use for the groups}
+\item{colours}{Colours to use for the groups}
 }
 \description{
 A scatterplot with links

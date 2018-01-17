@@ -1,26 +1,8 @@
----
-title: "7. heatmaply"
-output:
-  rmarkdown::html_vignette:
-    fig_caption: yes
-    self_contained: yes
-    toc: true
-    fig_width: 10
-    fig_height: 6
-    depth: 3  # upto three depths of headings (specified by #, ## and ###)  
-
-vignette: >
-  %\VignetteIndexEntry{Vignette Title}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
-
-```{r, echo = FALSE}
+## ---- echo = FALSE-------------------------------------------------------
 suppressPackageStartupMessages(library("SummarizedExperiment"))
 suppressPackageStartupMessages(library("plotlytalk"))
-```
 
-```{r, fig.caption = "Correlation heatmap"}
+## ---- fig.caption = "Correlation heatmap"--------------------------------
 ## https://www.sciencedirect.com/science/article/pii/S1673852717301492
 df <- colData(GBMdata)[, "subtype_IDH.status", drop = FALSE]
 colnames(df) <- "IDH1 status"
@@ -39,9 +21,8 @@ heatmaply_cor(cor(raw_median_mat[gene_signature, ]),
     row_side_colors = df,
     plot_method = "plotly",
     showticklabels = c(FALSE, FALSE))
-```
 
-```{r}
+## ------------------------------------------------------------------------
 voom_mat <- voomed_GBM$E
 voom_median_mat <- sweep(voom_mat, 1, rowMedians(voom_mat))
 max <- max(abs(voom_median_mat[gene_signature, ]))
@@ -51,4 +32,4 @@ heatmaply(t(voom_median_mat[gene_signature, ]),
     limits = c(-max, max),
     plot_method = "plotly",
     col = cool_warm)
-```
+

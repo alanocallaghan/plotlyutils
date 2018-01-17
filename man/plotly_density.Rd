@@ -10,7 +10,7 @@ plotly_density(mat, title = "", xlab = "", palette = viridis)
 A plotly htmlwidget
 }
 \description{
-Creates a density plot of all columns of a matrix or data.frame like 
+Creates a density plot of all columns of a matrix or data.frame like
 structure.
 }
 \examples{
