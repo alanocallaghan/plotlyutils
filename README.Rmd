@@ -14,7 +14,87 @@ output:
 plotlytalk
 ============
 
-This package contains a talk and related functions for an Edinbr meeting.
+This package contains a talk and related functions for an talk about [plotly](https://plot.ly/).
+
+Installation
+============
+```{r, eval=FALSE}
+devtools::install_github("alanocallaghan/plotlytalk")
+```
+```{r, echo=FALSE}
+suppressPackageStartupMessages(library(plotlytalk))
+suppressPackageStartupMessages(library(SummarizedExperiment))
+```
 
 Outline
--------
+=======
+
+The talk shows many examples of [ggplotly](https://www.rdocumentation.org/packages/plotly/versions/4.7.1/topics/ggplotly), some examples of how to plot using plotly, several functions which create custom plotly plots, and
+a custom htmlwidget written using JavaScript.
+
+The custom plots are shown below:
+
+## A boxplot with jittered points
+```{r}
+plotly_boxplot(iris[, -5])
+```
+
+## A line plot with selectable y variable
+```{r}
+set.seed(42)
+df <- lapply(1:26, function(x) rnorm(50)) %>% 
+    as.data.frame()
+colnames(df) <- letters
+df[["seq"]] <- 1:50
+
+df %>% dropdown_lineplot(x="seq", yvars = letters)
+```
+
+
+## A density plot of a matrix or data.frame
+```{r}
+
+plotly_density(
+    log2(assay(GBMdata[, 1:10]) + 0.5), 
+    palette=colorspace::rainbow_hcl,
+    xlab = "log<sub>2</sub>(reads + 0.5)") %>% 
+    layout(showlegend = FALSE)
+
+```
+
+## A scatter plot wherein clicking on a point opens a link in a new tab
+```{r}
+set.seed(42)
+tt <- GBMtopTable[sample(seq_len(nrow(GBMtopTable)), 1000), ]
+linked_scatterplot(
+    x = tt[["logFC"]],
+    xlab = "log<sub>2</sub>(fold-change)",
+    y = -log10(tt[["adj.P.Val"]]),
+    ylab = "-log<sub>10</sub>(FDR-adjusted p-value)",
+    xlim = c(-max(abs(tt[["logFC"]])), max(abs(tt[["logFC"]]))) * 1.1,
+    text = tt[["Text"]],
+    links = tt[["Links"]],
+    groups = tt[["Group"]],
+    title = "Glioblastoma - IDH1 mutant vs wt",
+    colors = c("#0000ff", "#000000", "#ff0000"))
+```
+
+
+
+Useful links
+============
+
+- [The site for this talk](https://alanocallaghan.github.io/plotlytalk/)
+- [github repository](https://github.com/Alanocallaghan/plotlytalk/)
+- [plotly (CRAN)](https://cran.r-project.org/web/packages/plotly/index.html)
+- [plotly for R (book)](https://plotly-book.cpsievert.me)
+- [plotly (R reference)](https://plot.ly/r/reference/)
+- [plotly (JavaScript reference)](https://plot.ly/javascript/reference/)
+- [plotly (github)](https://github.com/ropensci/plotly/)
+- [Carson Sievert's github (plotly R package maintainer)](https://github.com/cpsievert/)
+- [heatmaply (CRAN)](https://github.com/talgalili/heatmaply)
+- [heatmaply (github)](https://cran.r-project.org/web/packages/plotly/index.html)
+- [heatmaply (publication)](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btx657/4562328)
+- [iheatmapr (CRAN)](https://cran.r-project.org/web/packages/iheatmapr/index.html)
+- [iheatmapr (github)](https://github.com/ropensci/iheatmapr)
+

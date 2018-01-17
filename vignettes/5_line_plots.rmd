@@ -30,5 +30,5 @@ df %>% plot_ly(x = ~seq, y = ~b, type = "scatter", mode = "lines")
 
 
 ```{r}
-df %>% dropdown_lineplot(x="seq")
+df %>% dropdown_lineplot(x="seq", yvars = letters)
 ```
