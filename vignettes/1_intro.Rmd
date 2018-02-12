@@ -58,9 +58,12 @@ ax <- list(
 )
 
 plot_ly(datasaurus_dozen, 
-    x = ~x, y = ~y, colour = ~dataset, 
+    x = ~x, 
+    y = ~y, 
+    frame = ~dataset, 
     mode = "markers",
-    type = "scatter") %>%
+    type = "scatter",
+    showlegend = FALSE) %>%
     layout(xaxis = ax, yaxis = ax) %>%
     animation_opts(frame = 5000, transition = 500)
 
