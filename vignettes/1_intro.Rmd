@@ -26,3 +26,42 @@ suppressPackageStartupMessages(library("plotlytalk"))
 - Line plots (and density plots)
 - Heatmaps
 - Custom `htmlwidgets`
+
+
+
+# Motivation
+
+```{r}
+
+library(plotly)
+library(datasauRus)
+
+datasaurus_dozen[["dataset"]] <- factor(datasaurus_dozen[["dataset"]],
+  levels = c("away", 
+    "high_lines", "wide_lines", 
+    "h_lines", "v_lines", 
+    "slant_down", "slant_up",
+    "dots", 
+    "circle",
+    "bullseye",
+    "x_shape",
+    "star",
+    "dino"))
+
+
+ax <- list(
+  title = "",
+  zeroline = FALSE,
+  showline = FALSE,
+  showticklabels = FALSE,
+  showgrid = FALSE
+)
+
+plot_ly(datasaurus_dozen, 
+    x = ~x, y = ~y, colour = ~dataset, 
+    mode = "markers",
+    type = "scatter") %>%
+    layout(xaxis = ax, yaxis = ax) %>%
+    animation_opts(frame = 5000, transition = 500)
+
+```
