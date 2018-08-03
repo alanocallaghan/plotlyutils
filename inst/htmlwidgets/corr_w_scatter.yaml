@@ -1,0 +1,11 @@
+dependencies:
+  - name: plotly
+    version: 0.0.0
+    src: htmlwidgets/lib/plotly/
+    script: 
+      - plotly-latest.min.js
+  - name: corr_w_scatter
+    version: 0.1.0
+    src: htmlwidgets/lib/corr_w_scatter
+    script:
+      - corr_w_scatter.js

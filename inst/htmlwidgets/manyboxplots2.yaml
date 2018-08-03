@@ -1,0 +1,13 @@
+dependencies:
+  - name: plotly
+    version: 0.0.0
+    src: htmlwidgets/lib/plotly/
+    script: 
+      - plotly-latest.min.js
+  - name: manyboxplots
+    version: 0.0.0
+    src: htmlwidgets/lib/manyboxplots/
+    script:
+      - manyboxplots2.js
+    style:
+      - manyboxplots2.css
