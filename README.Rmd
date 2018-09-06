@@ -11,6 +11,9 @@ output:
     fig_height: 6
     depth: 3  # upto three depths of headings (specified by #, ## and ###)  
 ---
+[![Build Status](https://travis-ci.org/Alanocallaghan/plotlytalk.png?branch=master)](https://travis-ci.org/Alanocallaghan/plotlytalk)
+[![codecov.io](https://codecov.io/github/Alanocallaghan/plotlytalk/coverage.svg?branch=master)](https://codecov.io/github/Alanocallaghan/plotlytalk?branch=master)
+
 plotlytalk
 ============
 
