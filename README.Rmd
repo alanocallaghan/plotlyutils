@@ -11,6 +11,9 @@ output:
     fig_height: 6
     depth: 3  # upto three depths of headings (specified by #, ## and ###)  
 ---
+[![Build Status](https://travis-ci.org/Alanocallaghan/plotlytalk.png?branch=master)](https://travis-ci.org/Alanocallaghan/plotlytalk)
+[![codecov.io](https://codecov.io/github/Alanocallaghan/plotlytalk/coverage.svg?branch=master)](https://codecov.io/github/Alanocallaghan/plotlytalk?branch=master)
+
 plotlytalk
 ============
 
@@ -66,7 +69,7 @@ plotly_density(
 ```{r}
 set.seed(42)
 tt <- GBMtopTable[sample(seq_len(nrow(GBMtopTable)), 1000), ]
-linked_scatterplot(
+linked_scatter_plot(
     x = tt[["logFC"]],
     xlab = "log<sub>2</sub>(fold-change)",
     y = -log10(tt[["adj.P.Val"]]),

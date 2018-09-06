@@ -2,15 +2,20 @@
 % Please edit documentation in R/selectable_scatter_plot.R
 \name{selectable_scatter_plot}
 \alias{selectable_scatter_plot}
-\title{linked_scatterplot}
+\title{selectable_scatter_plot}
 \usage{
 selectable_scatter_plot(coords, colours, title = "")
 }
 \arguments{
+\item{coords}{data.frame or matrix of point co-ordinates}
+
+\item{colours}{data,frame of variables used to colour points}
+
 \item{title}{Plot title}
 }
 \description{
-A scatterplot with links
+A scatterplot with dropdown menus to select the x/y variables and
+the variable used to colour the points
 }
 \examples{
 pcs <- prcomp(mtcars)

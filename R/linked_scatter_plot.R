@@ -1,4 +1,4 @@
-#' linked_scatterplot
+#' linked_scatter_plot
 #'
 #' A scatterplot with links
 #' @param x x values
@@ -10,14 +10,14 @@
 #' @param xlim,ylim Range of X/Y axis
 #' @param colours Colours to use for the groups
 #' @examples
-#' linked_scatterplot(
+#' linked_scatter_plot(
 #'  1:10,
 #'  1:10,
 #'  rep("https://www.google.com", 10),
 #'  groups = sample(letters[1:2], 10, replace=TRUE))
 #' @importFrom assertthat assert_that
 #' @export
-linked_scatterplot <- function(
+linked_scatter_plot <- function(
     x,
     y,
     links,
@@ -43,7 +43,7 @@ linked_scatterplot <- function(
   )
 
   createWidget(
-    "linked_scatterplot",
+    "linked_scatter_plot",
     x = list(
       x = x,
       xlab = xlab,

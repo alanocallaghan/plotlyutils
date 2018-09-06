@@ -79,7 +79,7 @@ function selectable_scatter_plot(data, div) {
 
     function draw() {
         var colourby = colours[colourVar];
-
+        console.log(colours)
         if (!colourby.some(function(d) {
             return (typeof d === "string");
         })) {
@@ -98,7 +98,6 @@ function selectable_scatter_plot(data, div) {
                     y: data.coords[yVar],
                     text: hovertext,
                     hoverinfo: "text",
-                    hovermode: "closest",
                     marker: {
                         color: colourby,
                         colorscale: "Viridis",
@@ -110,7 +109,7 @@ function selectable_scatter_plot(data, div) {
                     type: "scatter"
                 }],
                 {
-                    title: x.title,
+                    title: data.title,
                     xaxis: {
                         title: xVar
                     },
@@ -118,7 +117,8 @@ function selectable_scatter_plot(data, div) {
                         title: yVar
                     },
                     width: plotWidth,
-                    height: plotHeight
+                    height: plotHeight,
+                    hovermode: "closest"
                 }
             );
 
@@ -145,8 +145,11 @@ function selectable_scatter_plot(data, div) {
                     }
                 }
                 var trace = {
+                    name: value === null ? "N/A": value,
                     x: xVals,
                     y: yVals,
+                    text: hovertext,
+                    hoverinfo: "text",
                     mode: "markers",
                     type: "scatter",
                     marker: {
@@ -159,9 +162,10 @@ function selectable_scatter_plot(data, div) {
             Plotly.newPlot(plotdiv,
                 traces,
                 {
-                    title: x.title,
+                    title: data.title,
                     width: plotWidth,
-                    height: plotHeight
+                    height: plotHeight,
+                    hovermode: "closest"
                 }
             );
 

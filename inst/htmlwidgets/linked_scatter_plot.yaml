@@ -4,8 +4,8 @@ dependencies:
     src: htmlwidgets/lib/plotly/
     script: 
       - plotly-latest.min.js
-  - name: linked_scatterplot
+  - name: linked_scatter_plot
     version: 0.1.0
-    src: htmlwidgets/lib/linked_scatterplot
+    src: htmlwidgets/lib/linked_scatter_plot
     script:
-      - linked_scatterplot.js
+      - linked_scatter_plot.js
