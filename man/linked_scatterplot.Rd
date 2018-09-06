@@ -6,8 +6,7 @@
 \usage{
 linked_scatterplot(x, y, links, groups = rep("1", length(x)), text = rep("",
   length(x)), title = "", xlab = "", xlim = range(x, na.rm = TRUE) * 1.1,
-  ylim = range(y, na.rm = TRUE) * 1.1, ylab = "",
-  colours = RColorBrewer::brewer.pal(length(unique(groups)), "Set2"))
+  ylim = range(y, na.rm = TRUE) * 1.1, ylab = "", colours = NULL)
 }
 \arguments{
 \item{x}{x values}
@@ -34,5 +33,5 @@ linked_scatterplot(
  1:10,
  1:10,
  rep("https://www.google.com", 10),
- groups=sample(letters[1:2], 10, replace=TRUE))
+ groups = sample(letters[1:2], 10, replace=TRUE))
 }

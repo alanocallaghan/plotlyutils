@@ -14,20 +14,26 @@
 #'  1:10,
 #'  1:10,
 #'  rep("https://www.google.com", 10),
-#'  groups=sample(letters[1:2], 10, replace=TRUE))
+#'  groups = sample(letters[1:2], 10, replace=TRUE))
 #' @importFrom assertthat assert_that
 #' @export
-linked_scatterplot <- function(x,
-                               y,
-                               links,
-                               groups=rep("1", length(x)),
-                               text = rep("", length(x)),
-                               title="",
-                               xlab="",
-                               xlim = range(x, na.rm = TRUE) * 1.1,
-                               ylim = range(y, na.rm = TRUE) * 1.1,
-                               ylab="",
-                               colours=RColorBrewer::brewer.pal(length(unique(groups)), "Set2")) {
+linked_scatterplot <- function(
+    x,
+    y,
+    links,
+    groups = rep("1", length(x)),
+    text = rep("", length(x)),
+    title = "",
+    xlab = "",
+    xlim = range(x, na.rm = TRUE) * 1.1,
+    ylim = range(y, na.rm = TRUE) * 1.1,
+    ylab = "",
+    colours = NULL) {
+
+  if (is.null(colours)) {
+    colours <- suppressWarnings(RColorBrewer::brewer.pal(length(unique(groups)), "Set2"))[seq_len(length(unique(groups)))]
+  }
+  
   assert_that(
     length(x) == length(y),
     length(links) == length(x),
