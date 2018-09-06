@@ -1,11 +1,11 @@
-function linked_scatterplot(x, el) {
+function linked_scatter_plot(x, el) {
     d3el = Plotly.d3.select("#" + el.id);
-    
+
     var groups = x.groups.filter(onlyUnique);
     groups.sort();
     var traces = new Array();
     for (var i = 0; i < groups.length; i ++) {
-      
+
       var ind_this = findAll(x.groups, groups[i]);
       var xcoords = new Array(),
         ycoords = new Array(),
@@ -28,20 +28,21 @@ function linked_scatterplot(x, el) {
       });
     }
     var layout = {
-      title: x.title, 
+      title: x.title,
       hovermode: "closest",
       autosize: true,
-      xaxis: {title: x.xlab, 
+      xaxis: {title: x.xlab,
         range: x.xlim},
-      yaxis: {title: x.ylab, 
+      yaxis: {title: x.ylab,
         range: x.ylim},
       margin: {l: 40, r: 30, t: 50, b: 50}
     };
- 
+
     Plotly.newPlot(el, traces, layout);
 
     el.on("plotly_click",
         function(data) {
+          console.log("test")
           for(var i=0; i < data.points.length; i++){
             var pn = data.points[i].pointNumber;
             var link = data.points[i].data.links[data.points[i].pointNumber];
@@ -58,7 +59,7 @@ function openInNewTab(url) {
 }
 
 
-function onlyUnique(value, index, self) { 
+function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
 }
 

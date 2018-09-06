@@ -44,7 +44,7 @@ plot_ly(tt,
 ```
 
 ```{r}
-linked_scatterplot(
+linked_scatter_plot(
     x = tt[["logFC"]],
     xlab = xtitle,
     y = -log10(tt[["adj.P.Val"]]),

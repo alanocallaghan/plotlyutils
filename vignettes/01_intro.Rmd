@@ -28,26 +28,30 @@ suppressPackageStartupMessages(library("plotlytalk"))
 - Custom `htmlwidgets`
 
 
-
 # Motivation
 
 ```{r}
 
-library(plotly)
 library(datasauRus)
+library(plotly)
+library(magrittr)
 
-datasaurus_dozen[["dataset"]] <- factor(datasaurus_dozen[["dataset"]],
-  levels = c("away", 
-    "high_lines", "wide_lines", 
-    "h_lines", "v_lines", 
-    "slant_down", "slant_up",
-    "dots", 
-    "circle",
-    "bullseye",
-    "x_shape",
-    "star",
-    "dino"))
-
+datasaurus_dozen$dataset %<>% factor(
+    levels = c(
+        "away", 
+        "high_lines", 
+        "wide_lines",
+        "h_lines", 
+        "v_lines",
+        "slant_down", 
+        "slant_up", 
+        "dots",
+        "bullseye",
+        "circle",
+        "star", 
+        "x_shape",
+        "dino")
+    )
 
 ax <- list(
   title = "",
