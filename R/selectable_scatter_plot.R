@@ -34,6 +34,7 @@ selectable_scatter_plot <- function(
     x = list(
       coords = coords,
       colours = colours,
+      names = rownames(coords),
       title = title
     ),
     sizingPolicy = sizingPolicy(
