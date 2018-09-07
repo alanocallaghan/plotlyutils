@@ -3,6 +3,7 @@
 #' A scatterplot with links
 #' @param x x values
 #' @param y y values
+#' @param links HTML links for each point
 #' @param groups Groups to color the points by.
 #' @param text Hovertext for the points
 #' @param title Plot title
@@ -16,6 +17,9 @@
 #'  rep("https://www.google.com", 10),
 #'  groups = sample(letters[1:2], 10, replace=TRUE))
 #' @importFrom assertthat assert_that
+#' @importFrom htmlwidgets createWidget sizingPolicy
+#' @importFrom viridis viridis
+#' @importFrom stats runif
 #' @export
 linked_scatter_plot <- function(
     x,
