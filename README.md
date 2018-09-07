@@ -22,7 +22,9 @@ plotlyutils
 ===========
 
 This package some utility functions and htmlwidgets for
-[plotly](https://plot.ly/), and a related talk (see vignettes).
+[plotly](https://plot.ly/), and a related talk (see vignettes and the
+[package site](https://alanocallaghan.github.io/plotlyutils/) (built
+with [pkgdown](https://github.com/r-lib/pkgdown)).
 
 Installation
 ============
@@ -109,8 +111,8 @@ Useful links
 ============
 
 -   [The site for this
-    talk](https://alanocallaghan.github.io/plotlytalk/)
--   [github repository](https://github.com/Alanocallaghan/plotlytalk/)
+    talk](https://alanocallaghan.github.io/plotlyutils/)
+-   [github repository](https://github.com/Alanocallaghan/plotlyutils/)
 -   [plotly
     (CRAN)](https://cran.r-project.org/web/packages/plotly/index.html)
 -   [plotly for R (book)](https://plotly-book.cpsievert.me)
