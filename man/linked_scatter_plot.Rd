@@ -14,6 +14,8 @@ linked_scatter_plot(x, y, links, groups = rep("1", length(x)),
 
 \item{y}{y values}
 
+\item{links}{HTML links for each point}
+
 \item{groups}{Groups to color the points by.}
 
 \item{text}{Hovertext for the points}

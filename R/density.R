@@ -3,15 +3,24 @@
 #' Creates a density plot of all columns of a matrix or data.frame like
 #' structure.
 #'
+#' @param mat Matrix for column-wise densities
+#' @param title Plot title
+#' @param xlab X axis label
+#' @param palette Colour palette function
+#' 
 #' @return A plotly htmlwidget
 #'
 #' @examples
-#' plotly_density(iris[, -5], title="Density plot of Iris dataset",
-#'      xlab = "Value")
+#' plotly_density(iris[, -5], 
+#'    title = "Density plot of Iris dataset",
+#'    xlab = "Value")
 #'
-#' plotly_density(voomed_GBM$E, title="Density plot of voomed GBM data",
-#'      xlab = "Expression level")
+#' plotly_density(
+#'    voomed_GBM$E, 
+#'    title = "Density plot of voomed GBM data",
+#'    xlab = "Expression level")
 #' @importFrom magrittr %>%
+#' @importFrom plotly plot_ly layout config
 #' @export
 plotly_density <- function(
     mat, 
@@ -19,12 +28,13 @@ plotly_density <- function(
     xlab = "",
     palette = viridis) {
 
-  assert_that(inherits(mat, "matrix"))
+  assert_that(inherits(mat, "matrix") || inherits(mat, "data.frame"))
 
   if (is.null(colnames(mat))) colnames(mat) <- seq_len(ncol(mat))
   densities <- lapply(seq_len(ncol(mat)), function(i) {
-    stats::density(mat[, i])
+    stats::density(mat[, i, drop = TRUE])
   })
+
   coords <- lapply(
     seq_len(ncol(mat)),
     function(i) {

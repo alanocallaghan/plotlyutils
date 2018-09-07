@@ -27,10 +27,9 @@ test_that("dropdown lineplot works", {
   expect_is(p, "plotly")
 })
 
-test_that("linked scatterplot works", {
-  set.seed(42)
+test_that("linked scatter_plot works", {
   tt <- GBMtopTable[sample(seq_len(nrow(GBMtopTable)), 1000), ]
-  p <- linked_scatterplot(
+  p <- linked_scatter_plot(
     x = tt[["logFC"]],
     xlab = "log<sub>2</sub>(fold-change)",
     y = -log10(tt[["adj.P.Val"]]),
@@ -41,6 +40,14 @@ test_that("linked scatterplot works", {
     groups = tt[["Group"]],
     title = "Glioblastoma - IDH1 mutant vs wt",
     colors = c("#0000ff", "#000000", "#ff0000")
+  )
+  expect_is(p, "htmlwidget")
+})
+
+test_that("linked scatter_plot works", {
+  p <- selectable_scatter_plot(
+    mtcars,
+    mtcars
   )
   expect_is(p, "htmlwidget")
 })

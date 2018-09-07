@@ -6,6 +6,15 @@
 \usage{
 plotly_density(mat, title = "", xlab = "", palette = viridis)
 }
+\arguments{
+\item{mat}{Matrix for column-wise densities}
+
+\item{title}{Plot title}
+
+\item{xlab}{X axis label}
+
+\item{palette}{Colour palette function}
+}
 \value{
 A plotly htmlwidget
 }
@@ -14,9 +23,12 @@ Creates a density plot of all columns of a matrix or data.frame like
 structure.
 }
 \examples{
-plotly_density(iris[, -5], title="Density plot of Iris dataset",
-     xlab = "Value")
+plotly_density(iris[, -5], 
+   title = "Density plot of Iris dataset",
+   xlab = "Value")
 
-plotly_density(voomed_GBM$E, title="Density plot of voomed GBM data",
-     xlab = "Expression level")
+plotly_density(
+   voomed_GBM$E, 
+   title = "Density plot of voomed GBM data",
+   xlab = "Expression level")
 }

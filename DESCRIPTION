@@ -8,18 +8,17 @@ Description:
     A few simple functions for using plotly for data exploration,
     and a talk relating these.
 BugReports: https://github.com/Alanocallaghan/plotlyutils
-Depends: R (>= 3.4.2),
-    plotly,
-    htmlwidgets,
-    heatmaply
-License: GPL v3
+Depends: R (>= 3.4.2)
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports:
     assertthat,
     colorspace,
     magrittr,
-    htmlwidgets
+    htmlwidgets,
+    RColorBrewer,
+    plotly
 Suggests:
     knitr,
     testthat,
@@ -29,8 +28,11 @@ Suggests:
     iheatmapr,
     SummarizedExperiment,
     edgeR,
+    heatmaply,
     pkgdown,
     datasauRus,
+    limma,
+    reshape2,
     covr
 VignetteBuilder: knitr
 RoxygenNote: 6.1.0

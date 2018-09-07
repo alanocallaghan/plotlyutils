@@ -22,7 +22,6 @@ suppressPackageStartupMessages(library("limma"))
 ```
 
 
-
 ```{r, fig.caption = "Density plot of counts"}
 
 plotly_density(

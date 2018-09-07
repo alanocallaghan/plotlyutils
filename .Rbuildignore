@@ -5,3 +5,6 @@
 ^data-raw$
 ^docs$
 ^codecov\.yml$
+Makefile
+\.travis\.yml
+htmlwidgets
