@@ -86,6 +86,7 @@ function selectable_scatter_plot(data, div) {
             var hovertext = [];
             for (var i = 0; i < data.coords[xVar].length; i++) {
                 hovertext.push(
+                    names[i] + "<br>" +
                     xVar + ": " + data.coords[xVar][i] + "<br>" +
                     yVar + ": " + data.coords[yVar][i] + "<br>" +
                     colourVar + ": " + colourby[i]
@@ -138,6 +139,7 @@ function selectable_scatter_plot(data, div) {
                         yVals.push(data.coords[yVar][i]);
                         indices.push(i);
                         hovertext.push(
+                            names[i] + "<br>" +
                             xVar + ": " + data.coords[xVar][i] + "<br>" +
                             yVar + ": " + data.coords[yVar][i] + "<br>" +
                             colourVar + ": " + colourby[i]
