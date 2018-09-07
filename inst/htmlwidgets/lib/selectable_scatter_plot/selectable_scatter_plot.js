@@ -162,6 +162,12 @@ function selectable_scatter_plot(data, div) {
             Plotly.newPlot(plotdiv,
                 traces,
                 {
+                    xaxis: {
+                        title: xVar
+                    },
+                    yaxis: {
+                        title: yVar
+                    },
                     title: data.title,
                     width: plotWidth,
                     height: plotHeight,

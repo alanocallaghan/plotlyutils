@@ -17,8 +17,9 @@ vignette: >
 
 ```{r, echo = FALSE}
 suppressPackageStartupMessages(library("SummarizedExperiment"))
-suppressPackageStartupMessages(library("plotlytalk"))
+suppressPackageStartupMessages(library("plotlyutils"))
 ```
+
 
 ```{r, fig.caption = "Correlation heatmap"}
 ## https://www.sciencedirect.com/science/article/pii/S1673852717301492

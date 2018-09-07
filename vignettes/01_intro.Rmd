@@ -6,7 +6,7 @@ output:
     self_contained: yes
     toc: true
     fig_width: 10
-    fig_height: 6
+    fig_height: 8
     depth: 3  # upto three depths of headings (specified by #, ## and ###)  
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
@@ -15,7 +15,7 @@ vignette: >
 ---
 
 ```{r, echo=FALSE}
-suppressPackageStartupMessages(library("plotlytalk"))
+suppressPackageStartupMessages(library("plotlyutils"))
 ```
 # Outline
 

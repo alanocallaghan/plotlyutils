@@ -102,8 +102,8 @@ selectable_scatter_plot(
 Useful links
 ============
 
-- [The site for this talk](https://alanocallaghan.github.io/plotlytalk/)
-- [github repository](https://github.com/Alanocallaghan/plotlytalk/)
+- [The site for this talk](https://alanocallaghan.github.io/plotlyutils/)
+- [github repository](https://github.com/Alanocallaghan/plotlyutils/)
 - [plotly (CRAN)](https://cran.r-project.org/web/packages/plotly/index.html)
 - [plotly for R (book)](https://plotly-book.cpsievert.me)
 - [plotly (R reference)](https://plot.ly/r/reference/)

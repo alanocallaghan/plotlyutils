@@ -1,4 +1,4 @@
-context("plotlytalk")
+context("plotlyutils")
 
 
 test_that("boxplot works", {
