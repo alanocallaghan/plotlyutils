@@ -39,6 +39,6 @@ selectable_scatter_plot <- function(
     sizingPolicy = sizingPolicy(
       browser.fill = TRUE, 
       viewer.fill = TRUE),
-    package = "plotlytalk"
+    package = "plotlyutils"
   )
 }
