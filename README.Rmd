@@ -1,5 +1,5 @@
 ---
-title: "Scatter plot with links"
+title: "Readme"
 author: "Alan O'Callaghan"
 date: "`r Sys.Date()`"
 output:
@@ -14,26 +14,28 @@ output:
 [![Build Status](https://travis-ci.org/Alanocallaghan/plotlytalk.png?branch=master)](https://travis-ci.org/Alanocallaghan/plotlytalk)
 [![codecov.io](https://codecov.io/github/Alanocallaghan/plotlytalk/coverage.svg?branch=master)](https://codecov.io/github/Alanocallaghan/plotlytalk?branch=master)
 
-plotlytalk
+plotlyutils
 ============
 
-This package contains a talk and related functions for an talk about [plotly](https://plot.ly/).
+This package some utility functions and htmlwidgets for [plotly](https://plot.ly/),
+and a related talk (see vignettes).
 
 Installation
 ============
-```{r, eval=FALSE}
-devtools::install_github("alanocallaghan/plotlytalk")
+```{r, eval = FALSE}
+devtools::install_github("Alanocallaghan/plotlyutils")
 ```
-```{r, echo=FALSE}
-suppressPackageStartupMessages(library(plotlytalk))
+```{r, echo = FALSE}
+suppressPackageStartupMessages(library(plotlyutils))
 suppressPackageStartupMessages(library(SummarizedExperiment))
 ```
 
 Outline
 =======
 
-The talk shows many examples of [ggplotly](https://www.rdocumentation.org/packages/plotly/versions/4.7.1/topics/ggplotly), some examples of how to plot using plotly, several functions which create custom plotly plots, and
-a custom htmlwidget written using JavaScript.
+The talk shows many examples of [ggplotly](https://www.rdocumentation.org/packages/plotly/versions/4.7.1/topics/ggplotly), some examples of how to plot using plotly, 
+several functions which create plotly objects using the R API, and
+two custom htmlwidget written using JavaScript.
 
 The custom plots are shown below:
 
@@ -82,6 +84,19 @@ linked_scatter_plot(
     colours = c("#0000ff", "#000000", "#ff0000"))
 ```
 
+## A scatter plot where x/y/colour variables can be selected dynamically
+```{r}
+mat <- mtcars
+colours <- mtcars
+## Make some things character for demonstration
+colours[, c("cyl", "gear")] <- lapply(colours[, c("cyl", "gear")], as.character)
+
+selectable_scatter_plot(
+    mat,
+    colours
+)
+
+```
 
 
 Useful links

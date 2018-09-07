@@ -58,6 +58,6 @@ linked_scatter_plot <- function(
       text = text
     ),
     sizingPolicy = sizingPolicy(browser.fill = TRUE, viewer.fill = TRUE),
-    package = "plotlytalk"
+    package = "plotlyutils"
   )
 }

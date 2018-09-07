@@ -1,10 +1,12 @@
-Package: plotlytalk
-Title: A talk about plotly
+Package: plotlyutils
+Title: Some utility functions for plotly
 Version: 0.0.0.9000
 Authors@R: person("Alan", "O'Callaghan", 
     email = "alan.ocallaghan@outlook.com",
     role = c("aut", "cre"))
-Description: A talk for EdinbR
+Description: 
+    A few simple functions for using plotly for data exploration,
+    and a talk relating these.
 Depends: R (>= 3.4.2),
     plotly,
     htmlwidgets,
