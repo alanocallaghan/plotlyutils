@@ -15,18 +15,17 @@ vignette: >
 ---
 
 ```{r, echo = FALSE}
-suppressPackageStartupMessages(library("SummarizedExperiment"))
 suppressPackageStartupMessages(library("magrittr"))
 suppressPackageStartupMessages(library("plotlyutils"))
-suppressPackageStartupMessages(library("limma"))
 ```
 
 
 
 ```{r, fig.caption = "Density plot of counts"}
-
+mat <- GBMdata@assays[[1]]
+colnames(mat) <- rownames(GBMdata@colData)
 plotly_density(
-    log2(assay(GBMdata) + 0.5), 
+    log2(mat + 0.5), 
     palette=colorspace::rainbow_hcl,
     xlab = "log<sub>2</sub>(reads + 0.5)") %>% 
     layout(showlegend = FALSE)

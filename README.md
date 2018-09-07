@@ -15,8 +15,8 @@
 -   [Useful links](#useful-links)
 
 [![Build
-Status](https://travis-ci.org/Alanocallaghan/plotlytalk.png?branch=master)](https://travis-ci.org/Alanocallaghan/plotlytalk)
-[![codecov.io](https://codecov.io/github/Alanocallaghan/plotlytalk/coverage.svg?branch=master)](https://codecov.io/github/Alanocallaghan/plotlytalk?branch=master)
+Status](https://travis-ci.org/Alanocallaghan/plotlyutils.png?branch=master)](https://travis-ci.org/Alanocallaghan/plotlyutils)
+[![codecov.io](https://codecov.io/github/Alanocallaghan/plotlyutils/coverage.svg?branch=master)](https://codecov.io/github/Alanocallaghan/plotlyutils?branch=master)
 
 plotlyutils
 ===========
@@ -110,8 +110,8 @@ A scatter plot where x/y/colour variables can be selected dynamically
 Useful links
 ============
 
--   [The site for this
-    talk](https://alanocallaghan.github.io/plotlyutils/)
+-   [The pkgdown site for this
+    package](https://alanocallaghan.github.io/plotlyutils/)
 -   [github repository](https://github.com/Alanocallaghan/plotlyutils/)
 -   [plotly
     (CRAN)](https://cran.r-project.org/web/packages/plotly/index.html)
