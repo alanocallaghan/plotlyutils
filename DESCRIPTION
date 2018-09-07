@@ -10,7 +10,6 @@ Description:
 Depends: R (>= 3.4.2),
     plotly,
     htmlwidgets,
-    iheatmapr,
     heatmaply
 License: GPL v3
 Encoding: UTF-8
@@ -19,19 +18,17 @@ Imports:
     assertthat,
     colorspace,
     magrittr,
-    htmlwidgets,
-    iheatmapr
+    htmlwidgets
 Suggests:
     knitr,
     testthat,
     rmarkdown,
     TCGAbiolinks,
     gdata,
+    iheatmapr,
     SummarizedExperiment,
     edgeR,
     pkgdown,
-    covr,
-    iheatmapr,
     datasauRus,
     covr
 VignetteBuilder: knitr
