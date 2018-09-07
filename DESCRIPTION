@@ -7,6 +7,7 @@ Authors@R: person("Alan", "O'Callaghan",
 Description: 
     A few simple functions for using plotly for data exploration,
     and a talk relating these.
+BugReports: https://github.com/Alanocallaghan/plotlyutils
 Depends: R (>= 3.4.2),
     plotly,
     htmlwidgets,
