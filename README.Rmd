@@ -11,8 +11,8 @@ output:
     fig_height: 6
 #    depth: 3  # upto three depths of headings (specified by #, ## and ###)  
 ---
-[![Build Status](https://travis-ci.org/Alanocallaghan/plotlytalk.png?branch=master)](https://travis-ci.org/Alanocallaghan/plotlytalk)
-[![codecov.io](https://codecov.io/github/Alanocallaghan/plotlytalk/coverage.svg?branch=master)](https://codecov.io/github/Alanocallaghan/plotlytalk?branch=master)
+[![Build Status](https://travis-ci.org/Alanocallaghan/plotlyutils.png?branch=master)](https://travis-ci.org/Alanocallaghan/plotlyutils)
+[![codecov.io](https://codecov.io/github/Alanocallaghan/plotlyutils/coverage.svg?branch=master)](https://codecov.io/github/Alanocallaghan/plotlyutils?branch=master)
 
 plotlyutils
 ============
@@ -103,7 +103,7 @@ selectable_scatter_plot(
 Useful links
 ============
 
-- [The site for this talk](https://alanocallaghan.github.io/plotlyutils/)
+- [The pkgdown site for this package](https://alanocallaghan.github.io/plotlyutils/)
 - [github repository](https://github.com/Alanocallaghan/plotlyutils/)
 - [plotly (CRAN)](https://cran.r-project.org/web/packages/plotly/index.html)
 - [plotly for R (book)](https://plotly-book.cpsievert.me)

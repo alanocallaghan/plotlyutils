@@ -13,8 +13,15 @@
 #'      xlab = "Expression level")
 #' @importFrom magrittr %>%
 #' @export
-plotly_density <- function(mat, title = "", xlab = "",
-                           palette = viridis) {
+plotly_density <- function(
+    mat, 
+    title = "", 
+    xlab = "",
+    palette = viridis) {
+
+  assert_that(inherits(mat, "matrix"))
+
+  if (is.null(colnames(mat))) colnames(mat) <- seq_len(ncol(mat))
   densities <- lapply(seq_len(ncol(mat)), function(i) {
     stats::density(mat[, i])
   })
