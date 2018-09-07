@@ -17,6 +17,7 @@ vignette: >
 ```{r, echo = FALSE}
 suppressPackageStartupMessages({
     library("plotlyutils")
+    library("SummarizedExperiment")
 })
 ```
 
@@ -31,9 +32,9 @@ columns <- c(
     "subtype_Pan.Glioma.RNA.Expression.Cluster",
     "ethnicity"
 )
-colours <- GBMdata@colData[, columns, drop = FALSE]
+colours <- colData(GBMdata)[, columns, drop = FALSE]
 colours <- as.data.frame(colours)
-colours$TotalReads <- colSums(GBMdata@assays[[1]])
+colours$TotalReads <- colSums(assay(GBMdata))
 
 
 plot(

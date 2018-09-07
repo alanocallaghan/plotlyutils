@@ -16,13 +16,14 @@ vignette: >
 ---
 
 ```{r, echo = FALSE}
+suppressPackageStartupMessages(library("SummarizedExperiment"))
 suppressPackageStartupMessages(library("plotlyutils"))
 ```
 
 
 ```{r, fig.caption = "Correlation heatmap"}
 ## https://www.sciencedirect.com/science/article/pii/S1673852717301492
-df <- GBMdata@colData[, "subtype_IDH.status", drop = FALSE]
+df <- colData(GBMdata)[, "subtype_IDH.status", drop = FALSE]
 colnames(df) <- "IDH1 status"
 gene_signature <- c("ALDOB",
     "ENO1",
@@ -33,9 +34,8 @@ gene_signature <- c("ALDOB",
     "LDHA",
     "LDHB",
     "PKLR")
-raw_mat <- GBMdata@assays[[1]]
-rownames(raw_mat) <- GBMdata@rowRanges@ranges@NAMES
-raw_median_mat <- sweep(raw_mat, 1, apply(raw_mat, 1, median))
+raw_mat <- assay(GBMdata)
+raw_median_mat <- sweep(raw_mat, 1, rowMedians(raw_mat))
 heatmaply_cor(cor(raw_median_mat[gene_signature, ]),
     row_side_colors = df,
     plot_method = "plotly",
@@ -44,7 +44,7 @@ heatmaply_cor(cor(raw_median_mat[gene_signature, ]),
 
 ```{r}
 voom_mat <- voomed_GBM$E
-voom_median_mat <- sweep(voom_mat, 1, apply(voom_mat, 1, median))
+voom_median_mat <- sweep(voom_mat, 1, rowMedians(voom_mat))
 max <- max(abs(voom_median_mat[gene_signature, ]))
 heatmaply(t(voom_median_mat[gene_signature, ]),
     row_side_colors = df,
