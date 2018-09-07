@@ -19,7 +19,7 @@ Imports:
     assertthat,
     colorspace,
     magrittr,
-    htmlwidgets
+    SummarizedExperiment
 Suggests:
     knitr,
     testthat,
@@ -27,7 +27,6 @@ Suggests:
     TCGAbiolinks,
     gdata,
     iheatmapr,
-    SummarizedExperiment,
     edgeR,
     pkgdown,
     datasauRus,
