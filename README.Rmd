@@ -18,7 +18,8 @@ plotlyutils
 ============
 
 This package some utility functions and htmlwidgets for [plotly](https://plot.ly/),
-and a related talk (see vignettes).
+and a related talk (see vignettes and the [package site](https://alanocallaghan.github.io/plotlyutils/) 
+(built with [pkgdown](https://github.com/r-lib/pkgdown)).
 
 Installation
 ============
