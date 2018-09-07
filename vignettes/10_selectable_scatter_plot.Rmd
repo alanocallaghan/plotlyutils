@@ -16,7 +16,7 @@ vignette: >
 
 ```{r, echo = FALSE}
 suppressPackageStartupMessages({
-    library("plotlytalk")
+    library("plotlyutils")
     library("SummarizedExperiment")
 })
 ```

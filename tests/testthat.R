@@ -1,4 +1,4 @@
 library(testthat)
-library(plotlytalk)
+library(plotlyutils)
 
-test_check("plotlytalk")
+test_check("plotlyutils")
