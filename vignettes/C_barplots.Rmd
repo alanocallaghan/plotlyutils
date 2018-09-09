@@ -14,16 +14,19 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, echo=FALSE}
-suppressPackageStartupMessages(library("plotlyutils"))
-```
-
-
 ```{r}
+suppressPackageStartupMessages({
+  library("plotlyutils")
+  library("ggplot2")
+  library("plotly")
+})
+
 g <- ggplot(mpg, aes(class))
 g <- g + geom_bar(aes(fill=drv))
 print(g)
+```
 
+```{r}
 ggplotly(g)
 ```
 

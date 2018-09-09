@@ -15,9 +15,12 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, echo = FALSE}
-suppressPackageStartupMessages(library("SummarizedExperiment"))
-suppressPackageStartupMessages(library("plotlyutils"))
+```{r}
+suppressPackageStartupMessages({
+    library("SummarizedExperiment")
+    library("plotlyutils")
+    library("heatmaply")
+})
 ```
 
 

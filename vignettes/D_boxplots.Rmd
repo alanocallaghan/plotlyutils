@@ -14,11 +14,13 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, echo=FALSE}
-suppressPackageStartupMessages(library("plotlyutils"))
-```
-
 ```{r}
+suppressPackageStartupMessages({
+  library("plotlyutils")
+  library("ggplot2")
+  library("plotly")
+})
+
 g <- ggplot(mpg, aes(class, hwy))
 g <- g + geom_boxplot()
 print(g)
