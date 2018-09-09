@@ -10,7 +10,7 @@
 #' colours <- mtcars[, c("cyl", "vs", "am", "gear", "carb")]
 #' colours[] <- lapply(colours, as.character)
 #' selectable_scatter_plot(
-#'   pcs,
+#'   pcs$x,
 #'   colours,
 #'   "interactive PCA plot"
 #' )

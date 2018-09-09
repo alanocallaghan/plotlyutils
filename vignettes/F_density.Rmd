@@ -19,6 +19,7 @@ suppressPackageStartupMessages({
   library("SummarizedExperiment")
   library("magrittr")
   library("plotlyutils")
+  library("plotly")
   library("limma")
 })
 ```

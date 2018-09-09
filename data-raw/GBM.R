@@ -33,6 +33,7 @@ dge <- edgeR::calcNormFactors(dge, method = "TMM")
 
 
 voomed_GBM <- limma::voom(dge)
+voomed_GBM <- voomed_GBM[1:5000, ]
 use_data(voomed_GBM, overwrite = TRUE)
 
 design <- model.matrix(~ 0 + colData(GBMdata)$subtype_IDH.status)

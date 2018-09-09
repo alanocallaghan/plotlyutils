@@ -34,6 +34,7 @@ Suggests:
     datasauRus,
     limma,
     reshape2,
+    ggplot2,
     covr
 VignetteBuilder: knitr
 RoxygenNote: 6.1.0
