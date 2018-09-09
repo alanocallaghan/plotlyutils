@@ -6,12 +6,13 @@
 #' @return A plotly object
 #' @examples
 #' set.seed(42)
-#' df <- lapply(1:26, function(x) rnorm(50)) %>%
-#'     as.data.frame()
+#' df <- lapply(1:26, function(x) rnorm(50))
+#' df <- as.data.frame(df)
 #' colnames(df) <- letters
 #' df[["seq"]] <- 1:50
-#' df %>% dropdown_lineplot(x="seq", yvars = letters)
+#' dropdown_lineplot(df, x="seq", yvars = letters)
 #' @importFrom plotly add_lines add_trace
+#' @importFrom magrittr %>%
 #' @export
 dropdown_lineplot <- function(df, x, yvars) {
   ## Add trace directly here, since plotly adds a blank trace otherwise

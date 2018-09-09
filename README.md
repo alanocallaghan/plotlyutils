@@ -40,7 +40,7 @@ some examples of how to plot using plotly, several functions which
 create plotly objects using the R API, and two custom htmlwidget written
 using JavaScript.
 
-The custom plots are shown below:
+The custom plots are shown below.
 
 A boxplot with jittered points
 ------------------------------

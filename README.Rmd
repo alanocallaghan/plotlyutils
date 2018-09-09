@@ -26,10 +26,8 @@ Installation
 ```{r, eval = FALSE}
 devtools::install_github("Alanocallaghan/plotlyutils")
 ```
-```{r, echo = FALSE}
-suppressPackageStartupMessages(library(plotlyutils))
-suppressPackageStartupMessages(library(SummarizedExperiment))
-```
+
+
 
 Outline
 =======
@@ -38,7 +36,17 @@ The talk shows many examples of [ggplotly](https://www.rdocumentation.org/packag
 several functions which create plotly objects using the R API, and
 two custom htmlwidget written using JavaScript.
 
-The custom plots are shown below:
+The custom plots are shown below.
+
+```{r, echo = FALSE}
+## Load dependencies for this script
+suppressPackageStartupMessages({
+    library("plotlyutils")
+    library("SummarizedExperiment")
+    library("magrittr")
+    library("plotly")
+})
+```
 
 ## A boxplot with jittered points
 ```{r}

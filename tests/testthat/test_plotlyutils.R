@@ -23,7 +23,7 @@ test_that("dropdown lineplot works", {
   colnames(df) <- letters
   df[["seq"]] <- 1:50
 
-  p <- df %>% dropdown_lineplot(x = "seq")
+  p <- df %>% dropdown_lineplot(x = "seq", yvars=setdiff(colnames(df), "seq"))
   expect_is(p, "plotly")
 })
 
@@ -39,7 +39,7 @@ test_that("linked scatter_plot works", {
     links = tt[["Links"]],
     groups = tt[["Group"]],
     title = "Glioblastoma - IDH1 mutant vs wt",
-    colors = c("#0000ff", "#000000", "#ff0000")
+    colours = c("#0000ff", "#000000", "#ff0000")
   )
   expect_is(p, "htmlwidget")
 })

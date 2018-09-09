@@ -9,7 +9,6 @@ Makefile
 \.travis\.yml
 htmlwidgets
 GDCdata
-doc
 MANIFEST\.txt
 README_files
 Human_genes__GRCh38_p10_\.rda
