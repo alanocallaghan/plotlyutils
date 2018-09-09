@@ -11,7 +11,7 @@
 #' colnames(df) <- letters
 #' df[["seq"]] <- 1:50
 #' df %>% dropdown_lineplot(x="seq", yvars = letters)
-#' @importFrom plotly add_lines
+#' @importFrom plotly add_lines add_trace
 #' @export
 dropdown_lineplot <- function(df, x, yvars) {
   ## Add trace directly here, since plotly adds a blank trace otherwise

@@ -1,36 +1,7 @@
----
-title: "1. Introduction"
-output:
-  rmarkdown::html_vignette:
-    fig_caption: yes
-    self_contained: yes
-    toc: true
-    fig_width: 10
-    fig_height: 8
-    depth: 3  # upto three depths of headings (specified by #, ## and ###)  
-vignette: >
-  %\VignetteIndexEntry{Vignette Title}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
-
-```{r, echo=FALSE}
+## ---- echo=FALSE---------------------------------------------------------
 suppressPackageStartupMessages(library("plotlyutils"))
-```
-# Outline
 
-- ggplotly
-- Scatter plots
-- Barplots
-- Boxplots
-- Line plots (and density plots)
-- Heatmaps
-- Custom `htmlwidgets`
-
-
-# Motivation
-
-```{r}
+## ------------------------------------------------------------------------
 
 library(datasauRus)
 library(plotly)
@@ -71,4 +42,4 @@ plot_ly(datasaurus_dozen,
     layout(xaxis = ax, yaxis = ax) %>%
     animation_opts(frame = 5000, transition = 500)
 
-```
+

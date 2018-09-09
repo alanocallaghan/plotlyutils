@@ -5,6 +5,7 @@
 #' @return A plotly object
 #' @examples
 #'  plotly_boxplot(iris[, -5])
+#' @importFrom plotly add_trace
 #' @export
 plotly_boxplot <- function(x,
                            box_hoverinfo = FALSE,

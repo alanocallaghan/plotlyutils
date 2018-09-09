@@ -14,15 +14,12 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, echo=FALSE}
-suppressPackageStartupMessages(library("plotlyutils"))
-```
-```{r, eval=FALSE, echo=FALSE}
-head(GBMtopTable)
-GBMtopTable$pval <- -log10(GBMtopTable$adj.P.Val)
-```
-
 ```{r}
+suppressPackageStartupMessages({
+  library("plotlyutils")
+  library("plotly")
+})
+
 set.seed(42)
 tt <- GBMtopTable[sample(seq_len(nrow(GBMtopTable)), 1000), ]
 title <- "Glioblastoma - IDH1 mutant vs wt"

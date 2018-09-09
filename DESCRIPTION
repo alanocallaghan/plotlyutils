@@ -18,7 +18,8 @@ Imports:
     magrittr,
     htmlwidgets,
     RColorBrewer,
-    plotly
+    plotly,
+    viridis
 Suggests:
     knitr,
     testthat,

@@ -14,12 +14,14 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, echo=FALSE}
-suppressPackageStartupMessages(library("plotlyutils"))
-```
-
 ```{r}
+suppressPackageStartupMessages({
+  library("plotlyutils")
+  library("plotly")
+})
+
 set.seed(42)
+
 df <- lapply(1:26, function(x) rnorm(50)) %>% 
     as.data.frame()
 colnames(df) <- letters
