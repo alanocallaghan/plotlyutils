@@ -10,3 +10,9 @@ dependencies:
     script: selectable_scatter_plot.js
     stylesheet: selectable_scatter_plot.css
 
+  - name: selectable
+    version: 0.1.0
+    src: htmlwidgets/lib/selectable
+    script: selectable.js
+    stylesheet: selectable.css
+

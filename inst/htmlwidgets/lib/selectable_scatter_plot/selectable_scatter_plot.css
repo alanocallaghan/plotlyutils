@@ -5,10 +5,16 @@ select {
     background-repeat: no-repeat;
     background: transparent;
     padding: 5px;
-    padding-right: 1.5em
+    padding-right: 1.5em;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+option {
+    font-family: Helvetica, Arial, sans-serif;
 }
 
 span {
+    font-family: Helvetica, Arial, sans-serif;
     padding: 2px;
 }
 

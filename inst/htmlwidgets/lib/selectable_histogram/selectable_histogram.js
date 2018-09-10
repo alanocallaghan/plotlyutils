@@ -80,19 +80,11 @@ function selectable_histogram(data, div) {
     draw()
 }
 
-function capitalise(string) {
-    return(string[0].toUpperCase() + string.substring(1));
-}
-
 window.onresize = function() {
     Plotly.relayout(plotdiv, {
         'width': plotdiv.clientWidth,
         'height': plotdiv.clientHeight
     });
-}
-
-function onlyUnique(value, index, self) {
-    return self.indexOf(value) === index;
 }
 
 function freedmanDiaconisBreaks(nums) {

@@ -24,6 +24,6 @@ colours[] <- lapply(colours, as.character)
 selectable_scatter_plot(
   pcs$x,
   colours,
-  "interactive PCA plot"
+  "Interactive PCA plot"
 )
 }
