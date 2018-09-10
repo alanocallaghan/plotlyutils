@@ -1,0 +1,23 @@
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-position: right 50%;
+    background-repeat: no-repeat;
+    background: transparent;
+    padding: 5px;
+    padding-right: 1.5em
+}
+
+span {
+    padding: 2px;
+}
+
+#inner {
+    height: 100%;
+}
+
+
+#plot {
+    width: 90%;
+    height: 90%;
+}

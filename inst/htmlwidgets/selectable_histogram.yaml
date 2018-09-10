@@ -1,0 +1,12 @@
+dependencies:
+  - name: plotly
+    version: 0.0.0
+    src: htmlwidgets/lib/plotly/
+    script: 
+      - plotly-latest.min.js
+  - name: selectable_histogram
+    version: 0.1.0
+    src: htmlwidgets/lib/selectable_histogram
+    script: selectable_histogram.js
+    stylesheet: selectable_histogram.css
+
