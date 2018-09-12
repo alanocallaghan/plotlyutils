@@ -15,7 +15,12 @@ vignette: >
 ---
 
 ```{r, echo=FALSE}
-suppressPackageStartupMessages(library("plotlyutils"))
+suppressPackageStartupMessages({
+  library("datasauRus")
+  library("plotly")
+  library("magrittr")
+  library("plotlyutils")
+})
 ```
 # Outline
 
@@ -32,9 +37,7 @@ suppressPackageStartupMessages(library("plotlyutils"))
 
 ```{r}
 
-library(datasauRus)
-library(plotly)
-library(magrittr)
+
 
 datasaurus_dozen$dataset %<>% factor(
     levels = c(

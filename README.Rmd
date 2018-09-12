@@ -111,6 +111,7 @@ selectable_scatter_plot(
 Useful links
 ============
 
+- [Datasaurus dozen](https://www.autodeskresearch.com/publications/samestats)
 - [The pkgdown site for this package](https://alanocallaghan.github.io/plotlyutils/)
 - [github repository](https://github.com/Alanocallaghan/plotlyutils/)
 - [plotly (CRAN)](https://cran.r-project.org/web/packages/plotly/index.html)
@@ -124,4 +125,3 @@ Useful links
 - [heatmaply (publication)](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btx657/4562328)
 - [iheatmapr (CRAN)](https://cran.r-project.org/web/packages/iheatmapr/index.html)
 - [iheatmapr (github)](https://github.com/ropensci/iheatmapr)
-
