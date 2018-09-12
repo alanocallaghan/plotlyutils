@@ -42,7 +42,7 @@ gene_signature <- c("ALDOB",
     "LDHB",
     "PKLR")
 ind_gene <- which(rownames(GBMdata) %in% gene_signature)
-ind <- union(ind_gene, 1:2000)
+ind <- union(ind_gene, 1:5000)
 GBMdata <- GBMdata[ind, ]
 use_data(GBMdata, overwrite = TRUE)
 full_voomed <- voomed_GBM 
@@ -82,6 +82,6 @@ GBMtopTable$Group <- ifelse(GBMtopTable$adj.P.Val < 0.05,
   ifelse(GBMtopTable$logFC > 0, "Up-regulated", "Down-regulated"),
   "Not sig."
 )
-GBMtopTable <- GBMtopTable[ind, ]
+GBMtopTable <- GBMtopTable[rownames(GBMtopTable) %in% rownames(GBMdata), ]
 
 use_data(GBMtopTable, overwrite = TRUE)
