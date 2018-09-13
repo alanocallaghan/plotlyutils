@@ -39,8 +39,8 @@ data <- lapply(distributions, function(distribution) {
 data <- as.data.frame(data)
 colnames(data) <- distributions
 
-hist(data[[1]], breaks = "FD", main = "beta", xlab = "Value")
-hist(data[[2]], breaks = "FD", main = "chisquare", xlab = "Value")
+hist(data[[1]], breaks = "FD", main = "beta", xlab = "Value", freq = FALSE)
+hist(data[[2]], breaks = "FD", main = "chisquare", xlab = "Value", freq = FALSE)
 
 ```
 

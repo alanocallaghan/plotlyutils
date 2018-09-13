@@ -20,6 +20,7 @@ suppressPackageStartupMessages({
     library("SummarizedExperiment")
     library("plotlyutils")
     library("heatmaply")
+    library("limma")
 })
 ```
 

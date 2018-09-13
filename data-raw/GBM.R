@@ -42,7 +42,7 @@ gene_signature <- c("ALDOB",
     "LDHB",
     "PKLR")
 ind_gene <- which(rownames(GBMdata) %in% gene_signature)
-ind <- union(ind_gene, 1:5000)
+ind <- union(ind_gene, sample(1:nrow(GBMdata), 5000))
 GBMdata <- GBMdata[ind, ]
 use_data(GBMdata, overwrite = TRUE)
 full_voomed <- voomed_GBM 
