@@ -12,7 +12,7 @@
 #' selectable_scatter_plot(
 #'   pcs$x,
 #'   colours,
-#'   "interactive PCA plot"
+#'   "Interactive PCA plot"
 #' )
 #' @importFrom assertthat assert_that
 #' @export

@@ -4,13 +4,15 @@ dependencies:
     src: htmlwidgets/lib/plotly/
     script: 
       - plotly-latest.min.js
-  - name: selectable_scatter_plot
+  - name: selectable_histogram
     version: 0.1.0
-    src: htmlwidgets/lib/selectable_scatter_plot
-    script: selectable_scatter_plot.js
-    stylesheet: selectable_scatter_plot.css
+    src: htmlwidgets/lib/selectable_histogram
+    script: selectable_histogram.js
+    stylesheet: selectable_histogram.css
+
   - name: selectable
     version: 0.1.0
     src: htmlwidgets/lib/selectable
     script: selectable.js
     stylesheet: selectable.css
+

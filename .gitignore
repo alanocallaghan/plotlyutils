@@ -1,3 +1,5 @@
+Meta
+doc
 .Rproj.user
 .Rhistory
 .RData
@@ -5,3 +7,4 @@ inst/doc
 MANIFEST*
 GDC*
 Human*
+vignettes/figure

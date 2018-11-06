@@ -15,11 +15,13 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, echo = FALSE}
-suppressPackageStartupMessages(library("iheatmapr"))
-suppressPackageStartupMessages(library("datasets"))
-suppressPackageStartupMessages(library("reshape2"))
-suppressPackageStartupMessages(library("magrittr"))
+```{r}
+suppressPackageStartupMessages({
+  library("iheatmapr")
+  library("datasets")
+  library("reshape2")
+  library("magrittr")
+})
 
 Indometh_matrix <- acast(Indometh, Subject ~ time, value.var = "conc")
 Indometh_matrix <- Indometh_matrix[as.character(1:6),]

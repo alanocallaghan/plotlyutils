@@ -27,8 +27,10 @@ suppressPackageStartupMessages({
 
 ```{r, fig.caption = "Density plot of counts"}
 
+mat <- assay(GBMdata) + 0.5
+ind <- sample(1:ncol(mat), 30)
 plotly_density(
-    log2(assay(GBMdata) + 0.5), 
+    log2(mat[, ind]), 
     palette=colorspace::rainbow_hcl,
     xlab = "log<sub>2</sub>(reads + 0.5)") %>% 
     layout(showlegend = FALSE)
@@ -36,7 +38,7 @@ plotly_density(
 ```
 ```{r, fig.caption = "Voomed density"}
 plotly_density(
-    voomed_GBM$E, 
+    voomed_GBM$E[, ind], 
     palette=colorspace::rainbow_hcl,
     xlab = "log<sub>2</sub>(normalised counts per million)") %>%
     layout(showlegend = FALSE)

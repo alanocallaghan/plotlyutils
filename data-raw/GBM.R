@@ -25,7 +25,6 @@ ind_not_na <- !is.na(colData(data)$subtype_IDH.status)
 data <- data[, ind_not_na]
 rownames(data) <- rowData(data)[[2]]
 GBMdata <- data
-use_data(GBMdata, overwrite = TRUE)
 
 
 dge <- edgeR::DGEList(counts = assay(GBMdata))
@@ -33,7 +32,21 @@ dge <- edgeR::calcNormFactors(dge, method = "TMM")
 
 
 voomed_GBM <- limma::voom(dge)
-voomed_GBM <- voomed_GBM[1:5000, ]
+gene_signature <- c("ALDOB",
+    "ENO1",
+    "GALM",
+    "GAPDH",
+    "HK2",
+    "HK3",
+    "LDHA",
+    "LDHB",
+    "PKLR")
+ind_gene <- which(rownames(GBMdata) %in% gene_signature)
+ind <- union(ind_gene, sample(1:nrow(GBMdata), 5000))
+GBMdata <- GBMdata[ind, ]
+use_data(GBMdata, overwrite = TRUE)
+full_voomed <- voomed_GBM 
+voomed_GBM <- voomed_GBM[ind, ]
 use_data(voomed_GBM, overwrite = TRUE)
 
 design <- model.matrix(~ 0 + colData(GBMdata)$subtype_IDH.status)
@@ -42,7 +55,7 @@ colnames(design) <- gsub(
   colnames(design), fixed = TRUE
 )
 
-fit <- lmFit(voomed_GBM, design = design)
+fit <- lmFit(full_voomed, design = design)
 
 contrasts <- makeContrasts("Mutant-WT", levels = design)
 
@@ -69,5 +82,6 @@ GBMtopTable$Group <- ifelse(GBMtopTable$adj.P.Val < 0.05,
   ifelse(GBMtopTable$logFC > 0, "Up-regulated", "Down-regulated"),
   "Not sig."
 )
+GBMtopTable <- GBMtopTable[rownames(GBMtopTable) %in% rownames(GBMdata), ]
 
 use_data(GBMtopTable, overwrite = TRUE)

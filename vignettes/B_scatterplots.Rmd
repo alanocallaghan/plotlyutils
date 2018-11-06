@@ -20,7 +20,6 @@ suppressPackageStartupMessages({
   library("ggplot2")
   library("plotly")
 })
-
 g <- ggplot(mpg, aes(displ, hwy, colour = class)) + 
   geom_point()
 print(g)
@@ -28,8 +27,8 @@ ggplotly(g)
 ```
 
 
-## 3D scatterplot 
 ```{r}
+## 3D scatterplot 
 df <- data.frame(z = rnorm(100))
 df$y <- df$z * 1.5 + rnorm(100, 1, 0.5)
 df$x <- df$y * 3 + rnorm(100, 1, 5)
