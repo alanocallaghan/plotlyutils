@@ -25,8 +25,9 @@ suppressPackageStartupMessages({
 })
 ```
 
-- TCGA GBM data.
-- IDH1 gene signature taken from [Chen et al. (2017)](https://www.sciencedirect.com/science/article/pii/S1673852717301492)
+- TCGA GBM data
+- Glycolysis gene signature "correlated with IDH1 mutation in GBM" 
+  taken from [Chen et al. (2017)](https://www.sciencedirect.com/science/article/pii/S1673852717301492)
 
 ```{r, fig.caption = "Correlation heatmap"}
 ## https://www.sciencedirect.com/science/article/pii/S1673852717301492

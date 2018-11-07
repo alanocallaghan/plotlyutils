@@ -29,14 +29,9 @@ ggplotly(g)
 ```
 
 ```{r}
-plot_ly(mpg, x = ~class, y = ~hwy, type = "box")
+# plot_ly(mpg, x = ~class, y = ~hwy, type = "box")
 ```
 
-
-
-```{r, eval=FALSE, echo=FALSE}
-print(plotly_boxplot)
-```
 
 ```{r}
 plotly_boxplot(iris[, -5])
