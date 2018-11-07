@@ -70,6 +70,6 @@ plot_ly(datasaurus_dozen,
     type = "scatter",
     showlegend = FALSE) %>%
     layout(xaxis = ax, yaxis = ax) %>%
-    animation_opts(frame = 5000, transition = 500)
+    animation_opts(frame = 2500, transition = 500)
 
 ```
