@@ -1,10 +1,11 @@
 ---
-title: "1. Introduction"
+title: "1. Interactive data visualisation with plotly and R"
 output:
-  rmarkdown::html_vignette:
+  html_document:
+    code_folding: hide
     fig_caption: yes
     self_contained: yes
-    toc: true
+    toc: false
     fig_width: 10
     fig_height: 8
     depth: 3  # upto three depths of headings (specified by #, ## and ###)  
@@ -20,20 +21,73 @@ suppressPackageStartupMessages({
   library("plotly")
   library("magrittr")
   library("plotlyutils")
+  library("tidyr")
 })
 ```
-# Outline
 
-- ggplotly
-- Scatter plots
-- Barplots
-- Boxplots
-- Line plots (and density plots)
-- Heatmaps
-- Custom `htmlwidgets`
+# Background
+
+- Talk is available as an R package on github (or contact the author).
+
+# Motivation - why do we plot data?
+
+- Summarise
+- Explore
+- Discover
+
+# Anscombes quartet
+```{r}
+data(anscombe)
+df <- gather(anscombe) %>%
+  mutate(dataset = gsub("[xy](\\d)", "\\1", key)) %>%
+  mutate(key = gsub("\\d", "", key)) %>%
+  group_by(key) %>% 
+  mutate(id=1:n()) %>% 
+  spread(key, value) %>% 
+  select(-id)
+
+lms <- df %>% 
+  group_by(dataset) %>% 
+  summarise(
+    intercept = broom::tidy(lm(y ~ x))[1, "estimate"][[1]],
+    slope = broom::tidy(lm(y ~ x))[2, "estimate"][[1]],
+    x = min(df$x),
+    xend = max(df$x),
+    y = (x * slope) + intercept,
+    yend = (xend * slope) + intercept
+  )
 
 
-# Motivation
+ax <- list(
+  title = "",
+  zeroline = FALSE,
+  showline = FALSE,
+  showticklabels = FALSE,
+  showgrid = FALSE
+)
+
+plot_ly(df, 
+    x = ~x, 
+    y = ~y, 
+    frame = ~dataset, 
+    mode = "markers",
+    type = "scatter",
+    showlegend = FALSE) %>%
+  add_segments(
+    data = lms,
+    inherit = FALSE,
+    x = ~x,
+    xend = ~xend,
+    y = ~y,
+    yend = ~yend,
+    frame = ~dataset
+  ) %>%
+    layout(xaxis = ax, yaxis = ax) %>%
+    animation_opts(frame = 2500, transition = 500)
+
+```
+
+# Dirty Dozen
 
 ```{r}
 
@@ -54,14 +108,6 @@ datasaurus_dozen$dataset %<>% factor(
         "dino")
     )
 
-ax <- list(
-  title = "",
-  zeroline = FALSE,
-  showline = FALSE,
-  showticklabels = FALSE,
-  showgrid = FALSE
-)
-
 plot_ly(datasaurus_dozen, 
     x = ~x, 
     y = ~y, 
@@ -73,3 +119,19 @@ plot_ly(datasaurus_dozen,
     animation_opts(frame = 2500, transition = 500)
 
 ```
+
+
+# What can we do with plotly?
+
+- ggplotly - convert static ggplot objects to dynamic graphs
+- Scatter plots
+- Barplots
+- Boxplots
+- Line plots (including density plots)
+- Heatmaps
+- Combinations of all of the above!
+- Custom `htmlwidgets` with useful functionality (and web apps)
+
+# Not covered
+
+- Shiny

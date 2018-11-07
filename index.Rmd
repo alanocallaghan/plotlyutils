@@ -3,7 +3,8 @@ title: "Readme"
 author: "Alan O'Callaghan"
 date: "`r Sys.Date()`"
 output:
-  rmarkdown::md_document:
+  html_document:
+    code_folding: "hide"
 #    fig_caption: yes
 #    self_contained: yes
     toc: true

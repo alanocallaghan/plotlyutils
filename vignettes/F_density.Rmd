@@ -1,10 +1,11 @@
 ---
 title: "6. Density plots"
 output:
-  rmarkdown::html_vignette:
+  html_document:
+    code_folding: hide
     fig_caption: yes
     self_contained: yes
-    toc: true
+    toc: false
     fig_width: 10
     fig_height: 6
     depth: 3  # upto three depths of headings (specified by #, ## and ###)  
@@ -24,13 +25,16 @@ suppressPackageStartupMessages({
 })
 ```
 
+- TCGA Glioblastoma (GBM) data 
+- 5,000 randomly chosen genes, plus a gene signature (mentioned in vignette G)
+
 
 ```{r, fig.caption = "Density plot of counts"}
 
 mat <- assay(GBMdata) + 0.5
-ind <- sample(1:ncol(mat), 30)
+# ind <- sample(1:ncol(mat), 30)
 plotly_density(
-    log2(mat[, ind]), 
+    log2(mat), 
     palette=colorspace::rainbow_hcl,
     xlab = "log<sub>2</sub>(reads + 0.5)") %>% 
     layout(showlegend = FALSE)
@@ -38,7 +42,7 @@ plotly_density(
 ```
 ```{r, fig.caption = "Voomed density"}
 plotly_density(
-    voomed_GBM$E[, ind], 
+    voomed_GBM$E, 
     palette=colorspace::rainbow_hcl,
     xlab = "log<sub>2</sub>(normalised counts per million)") %>%
     layout(showlegend = FALSE)

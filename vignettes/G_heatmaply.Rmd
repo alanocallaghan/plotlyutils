@@ -1,10 +1,11 @@
 ---
 title: "7. heatmaply"
 output:
-  rmarkdown::html_vignette:
+  html_document:
+    code_folding: hide
     fig_caption: yes
     self_contained: yes
-    toc: true
+    toc: false
     fig_width: 10
     fig_height: 6
     depth: 3  # upto three depths of headings (specified by #, ## and ###)  
@@ -24,6 +25,8 @@ suppressPackageStartupMessages({
 })
 ```
 
+- TCGA GBM data.
+- IDH1 gene signature taken from [Chen et al. (2017)](https://www.sciencedirect.com/science/article/pii/S1673852717301492)
 
 ```{r, fig.caption = "Correlation heatmap"}
 ## https://www.sciencedirect.com/science/article/pii/S1673852717301492
