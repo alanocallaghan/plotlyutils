@@ -21,5 +21,3 @@ Installation
 ============
 
     devtools::install_github("Alanocallaghan/plotlyutils")
-
-> > > > > > > bfc88b0f7cb4aaeb146d0f0cfe9d745ff3eb2e17
