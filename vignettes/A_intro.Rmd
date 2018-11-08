@@ -9,12 +9,12 @@ output:
     fig_width: 10
     fig_height: 8
     depth: 3  # upto three depths of headings (specified by #, ## and ###)  
+
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-
 ```{r}
 suppressPackageStartupMessages({
   library("datasauRus")
@@ -130,7 +130,7 @@ plot_ly(datasaurus_dozen,
 - Line plots (including density plots)
 - Heatmaps
 - Combinations of all of the above!
-- Custom `htmlwidgets` with useful functionality (and web apps)
+- Custom `htmlwidgets` with useful functionality
 
 # Not covered
 
