@@ -3,10 +3,11 @@
 #' Creates a density plot of all columns of a matrix or data.frame like
 #' structure.
 #'
-#' @param mat Matrix for column-wise densities
+#' @param mat Matrix for column-wise kernel density estimate curves
 #' @param title Plot title
 #' @param xlab X axis label
-#' @param palette Colour palette function
+#' @param palette Colour palette function 
+#' (function that returns valid colour values, eg `rainbow`
 #' 
 #' @return A plotly htmlwidget
 #'

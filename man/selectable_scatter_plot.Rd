@@ -7,9 +7,10 @@
 selectable_scatter_plot(coords, colours, title = "")
 }
 \arguments{
-\item{coords}{data.frame or matrix of point co-ordinates}
+\item{coords}{data.frame or matrix of point co-ordinates
+Each column will be an entry in the X and Y drop-down menus}
 
-\item{colours}{data,frame of variables used to colour points}
+\item{colours}{data.frame of variables used to colour points}
 
 \item{title}{Plot title}
 }

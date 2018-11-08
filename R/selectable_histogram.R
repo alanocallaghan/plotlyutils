@@ -2,7 +2,8 @@
 #'
 #' A scatterplot with dropdown menus to select the x/y variables and
 #' the variable used to colour the points
-#' @param coords data.frame or matrix of point co-ordinates
+#' @param coords data.frame or matrix of variables 
+#'   (each column will be a separate histogram).
 #' @param title Plot title
 #' @param histnorm See https://plot.ly/javascript/reference/#histogram-histnorm
 #' @examples

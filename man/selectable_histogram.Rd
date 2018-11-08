@@ -9,7 +9,8 @@ selectable_histogram(coords, title = "",
   "density"))
 }
 \arguments{
-\item{coords}{data.frame or matrix of point co-ordinates}
+\item{coords}{data.frame or matrix of variables 
+(each column will be a separate histogram).}
 
 \item{title}{Plot title}
 

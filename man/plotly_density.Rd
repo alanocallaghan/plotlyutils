@@ -7,13 +7,14 @@
 plotly_density(mat, title = "", xlab = "", palette = viridis)
 }
 \arguments{
-\item{mat}{Matrix for column-wise densities}
+\item{mat}{Matrix for column-wise kernel density estimate curves}
 
 \item{title}{Plot title}
 
 \item{xlab}{X axis label}
 
-\item{palette}{Colour palette function}
+\item{palette}{Colour palette function 
+(function that returns valid colour values, eg `rainbow`}
 }
 \value{
 A plotly htmlwidget
