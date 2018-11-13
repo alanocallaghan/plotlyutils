@@ -3,7 +3,8 @@
 #' A scatterplot with dropdown menus to select the x/y variables and
 #' the variable used to colour the points
 #' @param coords data.frame or matrix of point co-ordinates
-#' @param colours data,frame of variables used to colour points
+#' Each column will be an entry in the X and Y drop-down menus
+#' @param colours data.frame of variables used to colour points
 #' @param title Plot title
 #' @examples
 #' pcs <- prcomp(mtcars)
