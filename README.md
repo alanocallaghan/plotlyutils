@@ -1,6 +1,3 @@
--   [plotlyutils](#plotlyutils)
--   [Installation](#installation)
-
 [![Build
 Status](https://travis-ci.org/Alanocallaghan/plotlyutils.png?branch=master)](https://travis-ci.org/Alanocallaghan/plotlyutils)
 [![codecov.io](https://codecov.io/github/Alanocallaghan/plotlyutils/coverage.svg?branch=master)](https://codecov.io/github/Alanocallaghan/plotlyutils?branch=master)
