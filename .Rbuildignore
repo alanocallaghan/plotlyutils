@@ -13,3 +13,4 @@ MANIFEST\.txt
 README_files
 Human_genes__GRCh38_p10_\.rda
 ^doc$
+_pkgdown.yml
