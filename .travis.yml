@@ -10,3 +10,5 @@ after_success:
 
 bioc_packages:
   - SummarizedExperiment
+
+warnings_are_errors: false
