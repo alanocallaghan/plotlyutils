@@ -9,8 +9,8 @@ plotlyutils
 ===========
 
 This package contains some utility functions and htmlwidgets for
-[plotly](https://plot.ly/), and a related talk (see vignettes and the
-[package site](https://alanocallaghan.github.io/plotlyutils/) (built
+[plotly](https://plot.ly/), and a related talk (see vignettes in the
+[vignettes package](https://alanocallaghan.github.io/plotlyvignettes/) (built
 with [pkgdown](https://github.com/r-lib/pkgdown)).
 
 Given the interactive nature of the plots in this package, it is much
