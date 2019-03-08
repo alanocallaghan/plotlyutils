@@ -36,6 +36,16 @@ Suggests:
     reshape2,
     ggplot2,
     covr,
-    rtweet
+    rtweet,
+    dplyr,
+    tidytext,
+    httr,
+    stringr,
+    purrr,
+    scales,
+    tidyr,
+    igraph,
+    here
+
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1
