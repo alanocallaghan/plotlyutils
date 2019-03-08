@@ -35,6 +35,7 @@ Suggests:
     limma,
     reshape2,
     ggplot2,
-    covr
+    covr,
+    rtweet
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1
