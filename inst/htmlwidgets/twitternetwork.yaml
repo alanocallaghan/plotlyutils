@@ -1,0 +1,12 @@
+dependencies:
+  - name: plotly
+    version: 0.0.0
+    src: htmlwidgets/lib/plotly/
+    script: 
+      - plotly-latest.min.js
+  - name: twitternetwork
+    version: 0.1.0
+    src: htmlwidgets/lib/twitternetwork
+    script:
+      - twitternetwork.js
+    stylesheet: twitternetwork.css

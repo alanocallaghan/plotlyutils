@@ -8,3 +8,5 @@ MANIFEST*
 GDC*
 Human*
 vignettes/figure
+.Renviron
+vignettes/.Renviron
