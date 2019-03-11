@@ -1,0 +1,6 @@
+dependencies:
+  - name: hello
+    version: 0.0.0
+    src: htmlwidgets/lib/hello/
+    script: 
+      - hello.js
