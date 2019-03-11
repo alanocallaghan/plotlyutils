@@ -46,6 +46,5 @@ Suggests:
     tidyr,
     igraph,
     here
-
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1
