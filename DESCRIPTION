@@ -19,7 +19,8 @@ Imports:
     htmlwidgets,
     RColorBrewer,
     plotly,
-    viridis
+    viridis,
+    networkD3
 Suggests:
     knitr,
     testthat,
