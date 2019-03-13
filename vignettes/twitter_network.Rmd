@@ -101,7 +101,8 @@ specifics.
 Sincere thanks for sharing the code for this analysis.
 
 ```{r}
-if (!file.exists(here("data/graph_data.rds"))) {
+if (!file.exists(here("data/graph_data.rds")) || 
+    !file.exists(here("data/tweet_g.rds"))) {
   create_token(
     app = 'network_tweets',
     consumer_key = Sys.getenv("consumer_key"),
@@ -238,8 +239,10 @@ if (!file.exists(here("data/graph_data.rds"))) {
     nodes = nodes,
     links = links
   )
+  saveRDS(tweet_g, here("data/tweet_g.rds"))
   saveRDS(graph_data, here("data/graph_data.rds"))
 } else {
+  tweet_g <- readRDS(here("data/tweet_g.rds"))
   graph_data <- readRDS(here("data/graph_data.rds"))
 }
 ```
@@ -247,7 +250,6 @@ if (!file.exists(here("data/graph_data.rds"))) {
 # d3Network
 
 ```{r}
-colnames(tweet_edges) <- c("Source", "Target")
 d <- igraph_to_networkD3(tweet_g)
 d$nodes$group <- 1
 forceNetwork(
