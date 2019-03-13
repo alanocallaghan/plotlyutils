@@ -1,3 +1,4 @@
+var s
 function twitternetwork(x, el) {
 
   var d3 = Plotly.d3;
@@ -33,10 +34,12 @@ function twitternetwork(x, el) {
     )
   );
 
-  var slider = d3.select("#" + el.id)
+  var slidecontainer = d3.select("#" + el.id)
     .append("div")
-    .attr("class", "slidecontainer")
+    .attr("class", "slidecontainer");
+  var slider = slidecontainer
     .append("input")
+    .attr("width", el.clientWidth)
     .attr("class", "slider")
     .attr("type", "range")
     .attr("min", 0)
@@ -47,6 +50,22 @@ function twitternetwork(x, el) {
       threshold = this.value;
       redraw();
     });
+
+  var axisScale = d3.scale.linear()
+    .domain([0, max])
+    .range([0, slidecontainer[0][0].clientWidth]);
+  var axis = d3.svg.axis()
+    .scale(axisScale)
+    .tickFormat(function(d) {
+      return d3.format("d")(d);
+    });
+  var axisG = slidecontainer.append("svg")
+    .attr("width", el.clientWidth)
+    .attr("height", 22.5)
+    .attr("overflow", "visible")
+    .append("g")
+    .call(axis);
+  d3.select("path").remove();
 
   nodes = nodes.map(function(d) {
     count = counts.filter(function(t) {
@@ -124,7 +143,7 @@ function twitternetwork(x, el) {
       return(d.count >= threshold ? d.name: "");
     });
   }
-  draw();
+  redraw();
 
   window.onresize = function(event) {
     svg.attr("width", el.clientWidth)

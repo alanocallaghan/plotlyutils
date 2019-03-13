@@ -26,9 +26,73 @@ suppressPackageStartupMessages({
   library("igraph")
   library("plotlyutils")
   library("htmlwidgets")
+  library("networkD3")
   library("here")  
 })
 ```
+
+
+
+# Hello world
+
+`inst/htmlwidgets/hello_world.js`
+```{javascript, eval=FALSE}
+HTMLWidgets.widget({
+
+  name: "hello_world",
+
+  type: "output",
+
+  factory: function(el, width, height) {
+    return {
+      renderValue: function(x) {
+        el.append("Hello, world!")
+      },
+      resize: function(x) {
+      }
+    };
+  }
+});
+```
+
+```{r, fig.height = 1, fig.width = 1}
+createWidget(
+  "hello_world",
+  x = list(),
+  package = "plotlyutils"
+)
+```
+
+# Something more familiar
+
+
+
+```{r, fig.height = 1, fig.width = 1}
+createWidget(
+  "hello_edinbr",
+  x = list(),
+  package = "plotlyutils"
+)
+```
+
+# Dependencies
+We could also refactor our two widgets. We can do this by another , the YAML
+configuration file.
+```{yaml, eval=FALSE}
+dependencies:
+  - name: hello
+    version: 0.0.0
+    src: htmlwidgets/lib/hello/
+    script: 
+      - hello.js
+```
+Where is simply a function 
+```{javascript, eval=FALSE}
+function hello(el, where) {
+    el.append("Hello, " + where + "!")
+}
+```
+
 
 
 # Create twitter network data using twitter API via rtweet
@@ -41,9 +105,10 @@ if (!file.exists(here("data/graph_data.rds"))) {
   create_token(
     app = 'network_tweets',
     consumer_key = Sys.getenv("consumer_key"),
-    consumer_secret = Sys.getenv("consumer_secret"),
-    access_token = Sys.getenv("access_token"),
-    access_secret = Sys.getenv("access_secret")
+    consumer_secret = Sys.getenv("consumer_secret")
+    # ,
+    # access_token = Sys.getenv("access_token"),
+    # access_secret = Sys.getenv("access_secret")
   )
   ntweets <- 30
 
@@ -177,6 +242,21 @@ if (!file.exists(here("data/graph_data.rds"))) {
 } else {
   graph_data <- readRDS(here("data/graph_data.rds"))
 }
+```
+
+# d3Network
+
+```{r}
+colnames(tweet_edges) <- c("Source", "Target")
+d <- igraph_to_networkD3(tweet_g)
+d$nodes$group <- 1
+forceNetwork(
+  Links = d$links, 
+  Nodes = d$nodes,
+  NodeID = "name",
+  Group = "group",
+  zoom = TRUE
+)
 ```
 
 # The magic
