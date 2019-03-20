@@ -1,3 +1,3 @@
 function hello(el, where) {
-    el.append("Hello, " + where + "!")
+    el.append("Hello, " + where + "!");
 }

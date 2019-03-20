@@ -1,0 +1,536 @@
+---
+title: Building interactive modules using htmlwidgets
+output:
+  html_document:
+    fig_width: 12
+    fig_height: 8
+    code_folding: hide
+    toc: yes
+---
+<!--
+%\VignetteEngine{knitr::rmarkdown}
+%\VignetteIndexEntry{Building interactive modules using htmlwidgets}
+-->
+
+# Introduction
+
+During this talk, I will explain why the htmlwidget framework is useful,
+how and when you might use it, and how it fits in with other frameworks in R.
+I will go through some brief examples of useful existing htmlwidgets,
+and some toy and real examples of htmlwidgets I have written for use with
+twitter and "omics" data.
+
+## What is a htmlwidget?
+
+A htmlwidget is a self-contained "web app" (HTML page) accessible from the R 
+console or within an Rmarkdown document.
+
+- Defines JavaScript and/or CSS dependencies.
+- Defines a minimal set of functions to render and resize the widget.
+- Takes an R list (transformed into JSON).
+- Renders some output in a (typically) standalone html page.
+
+## When are htmlwidgets useful?
+
+- To help you or your colleagues to explore data without needing to use the 
+  terminal.
+- To use in web pages, reports, publications and blogs.
+- Integration with "the downs" -- 
+  [Rmarkdown](https://rmarkdown.rstudio.com/), 
+  [blogdown](https://bookdown.org/yihui/blogdown/), 
+  [bookdown](https://bookdown.org/) and 
+  [pkgdown](https://pkgdown.r-lib.org/).
+- In combination with [Shiny](https://shiny.rstudio.com/) or 
+  [crosstalk](https://rstudio.github.io/crosstalk/) (or both).
+- To harness the awesome power of JavaScript for your R data.
+
+# Assumptions
+
+To get the most from this talk and from htmlwidgets in general, you need:
+
+- General R coding skills.
+- Basic package development skills.
+- Basic knowledge of HTML/CSS/JavaScript (or at least the ability to copy it 
+  from the web and modify it).
+
+```{r}
+# Load packages and prepare data
+suppressPackageStartupMessages({
+  library("rtweet")
+  library("dplyr")
+  library("tidytext")
+  library("httr")
+  library("stringr")
+  library("purrr")
+  library("RColorBrewer")
+  library("scales")
+  library("tidyr")
+  library("igraph")
+  # library("plotlyutils")
+  library("htmlwidgets")
+  library("networkD3")
+  library("here")
+  library("datasauRus")
+  library("plotly")
+  library("devtools")  
+})
+suppressMessages(suppressPackageStartupMessages(load_all(here())))
+
+# See [Elliot Meador's talk](https://github.com/EdinbR/edinbr-talks/blob/master/2019-01-16/ElliotMeador_EdinR_stripped.html) for information on the 
+# specifics. 
+# Sincere thanks for sharing the code for this analysis.
+if (!file.exists(here("data/graph_data.rds")) || 
+    !file.exists(here("data/tweet_g.rds"))) {
+  create_token(
+    app = 'network_tweets',
+    consumer_key = Sys.getenv("consumer_key"),
+    consumer_secret = Sys.getenv("consumer_secret")
+    # ,
+    # access_token = Sys.getenv("access_token"),
+    # access_secret = Sys.getenv("access_secret")
+  )
+  ntweets <- 20
+
+  alfa <- get_timeline(Sys.getenv("twitter_handle"), n = ntweets) # user handle in the quotes
+  regex <- "@([A-Za-z]+[A-Za-z0-9_]+)(?![A-Za-z0-9_]*\\.)"
+  replace_reg1 <- 'https://t.co/[A-Za-z\\d]+|'
+  replace_reg2 <- 'http://[A-Za-z\\d]+|&amp;|&lt;|&gt|RT|https'
+  replace_reg <- paste0(replace_reg1, replace_reg2)
+  unnest_reg <-  "([^A-Za-z\\d#@']|'(?![A-Za-z_\\d#@]))"
+
+
+  mentions <- alfa %>% 
+    filter(!grepl('^RT', text)) %>%
+    mutate(text = gsub(replace_reg, '', text),
+      row.id = row_number()) %>%
+    unnest_tokens(word,
+      text,
+      token = 'regex',
+      pattern = unnest_reg,
+      collapse = FALSE) %>%
+    mutate(mentioned = ifelse(grepl('@', word), word, NA)) %>%
+    distinct(mentioned) %>%
+    na.omit() %>%
+    pull(mentioned)
+
+  foxtrot <- map_df(mentions, function(x) { #map_df merges the dataframes
+    get_timeline(x, n = ntweets)
+  })
+  
+  golf <- foxtrot %>%
+    mutate_if(is.list, simplify_all) %>%   # take all lists and simplify
+    as_tibble()  %>%
+    mutate_if(is.list, as.character) %>%   # change all lists to a character
+    filter(!str_detect(text  , '^RT')) %>% # this is the same as above
+    mutate(text = str_replace_all(text  , replace_reg, ''),
+      row.id = row_number()) %>%
+    unnest_tokens(
+      word,
+      text,
+      token = 'regex',
+      pattern = unnest_reg,
+      collapse = F) %>%
+    mutate(mentioned = ifelse(str_detect(word, '@'), word, NA))
+  golf <- filter(golf, mentioned != "@" | is.na(mentioned))
+  Spectral_n <- colorRampPalette(brewer.pal(11, 'Spectral'))
+
+  tweet_g <- golf %>% 
+    transmute(screen_name = str_to_lower(str_c('@', screen_name)),
+        mentioned) %>%
+    na.omit() %>%
+    graph_from_data_frame() %>% # from igraph
+    simplify()
+    
+  tweet_edges <- tweet_g %>%
+    as_data_frame() %>%
+    as_tibble() %>%
+    mutate_all(funs(str_trim(.)))
+  edge_col <- tweet_edges %>%
+    mutate(betweenness = edge.betweenness(tweet_g)) %>%
+    arrange(betweenness) %>%
+    distinct(from) %>%
+    mutate(color = sample(Spectral_n(nrow(.)))) %>%
+    right_join(tweet_edges) %>%
+    select(name = from, to, color)
+
+  tweet_nodes <- tweet_g %>%
+    as_data_frame(., 'vertices') %>%
+    as_tibble() %>%
+    mutate_all(funs(str_trim(.)))
+
+  node_col_temp <- tweet_nodes %>%
+    mutate(in.degree = degree(tweet_g, mode = 'in')) %>%
+    left_join(edge_col) %>%
+    select(-to) %>%
+    distinct() %>%
+    filter(is.na(color)) %>%
+    distinct() %>%
+    filter(in.degree == 1) %>%
+    pull(name)
+
+  node_add <- edge_col %>%
+    filter(to %in% node_col_temp) %>%
+    select(name = to, color.2 = color)
+
+  n_shared_node <- tweet_nodes %>%
+    left_join(edge_col) %>%
+    select(-to) %>%
+    distinct() %>%
+    left_join(node_add) %>%
+    mutate_all(funs(ifelse(is.na(.), '', .))) %>%
+    unite(color, color, color.2, sep = '') %>%
+    filter(color == '') %>%
+    nrow()
+
+  node_col <- tweet_nodes %>%
+    left_join(edge_col) %>%
+    select(-to) %>%
+    distinct() %>%
+    left_join(node_add) %>%
+    mutate_all(funs(ifelse(is.na(.), '', .))) %>%
+    unite(color, color, color.2, sep = '') %>%
+    mutate(color = ifelse(color == '', Spectral_n(n_shared_node), color))
+    
+  edge.cols.ad <- map2(edge_col$color,
+    rescale(edge.betweenness(tweet_g), 0.5, 1),     
+    function(x, y) {
+     adjustcolor(x, y)
+    }) %>% 
+    flatten_chr()
+
+  node.cols.ad <- map2(node_col$color, 
+    rescale(degree(tweet_g), 0.5, 1), 
+      function(x, y){
+        adjustcolor(x, y)
+      }) %>% 
+    flatten_chr()
+  all <- unique(c(tweet_edges$from, tweet_edges$to))
+  nodes <- lapply(all, function(x) list(name = x))
+  links <- tweet_edges
+  links[] <- lapply(links, function(col) as.numeric(factor(col, levels = all)) - 1)
+  links <- lapply(seq_len(nrow(links)), function(i) {
+    list("source" = links[i, "from", drop = TRUE],
+    "target" = links[i, "to", drop = TRUE])
+  })
+
+  graph_data <- list(
+    nodes = nodes,
+    links = links
+  )
+  saveRDS(tweet_g, here("data/tweet_g.rds"))
+  saveRDS(graph_data, here("data/graph_data.rds"))
+} else {
+  tweet_g <- readRDS(here("data/tweet_g.rds"))
+  graph_data <- readRDS(here("data/graph_data.rds"))
+}
+```
+
+
+# Motivation
+
+Some pretty great htmlwidgets already exist for a huge variety of purposes.
+So if you can't be bothered to write your own, fear not! Here are a few examples.
+
+
+## d3Network
+
+Using networks of twitter interactions, we can generate an interactive network
+plot using the d3Network package. This package builds on the incredible 
+[d3 Javascript library](https://d3js.org/), written by 
+[Mike Bostock](https://twitter.com/mbostock).
+In this case, I am using code from 
+[Elliot Meador's talk](https://github.com/EdinbR/edinbr-talks/blob/master/2019-01-16/ElliotMeador_EdinR_stripped.html).
+
+```{r}
+d <- igraph_to_networkD3(tweet_g)
+d$nodes$group <- 1
+forceNetwork(
+  Links = d$links, 
+  Nodes = d$nodes,
+  NodeID = "name",
+  Group = "group",
+  zoom = TRUE
+)
+```
+
+## plotly
+
+[plotly](https://plot.ly/) is another great JavaScript library built upon d3.
+This library has its own [R API](http://github.com/ropensci/plotly), maintained
+by [Carson Sievert](https://cpsievert.me/) of RStudio. This is a more 
+conventional data visualisation library, with some really nice interactivity out
+of the box.
+
+```{r}
+datasaurus_dozen$dataset <- factor(datasaurus_dozen$dataset,
+    levels = c(
+        "away", 
+        "high_lines", 
+        "wide_lines",
+        "h_lines", 
+        "v_lines",
+        "slant_down", 
+        "slant_up", 
+        "dots",
+        "bullseye",
+        "circle",
+        "star", 
+        "x_shape",
+        "dino")
+    )
+
+ax <- list(
+  title = "",
+  zeroline = FALSE,
+  showline = FALSE,
+  showticklabels = FALSE,
+  showgrid = FALSE
+)
+
+plot_ly(datasaurus_dozen, 
+    x = ~x, 
+    y = ~y, 
+    frame = ~dataset, 
+    mode = "markers",
+    type = "scatter",
+    showlegend = FALSE) %>%
+    layout(xaxis = ax, yaxis = ax) %>%
+    animation_opts(frame = 2500, transition = 500)
+```
+
+# The basics
+
+## Hello world
+As always, the best introduction to technology is a hello world example!
+For htmlwidgets, this amounts to creating a JavaScript file, in this case
+`inst/htmlwidgets/hello_world.js`. This is the foundation of every widget:
+
+```{javascript, eval=FALSE}
+HTMLWidgets.widget({
+
+  name: "hello_world",
+
+  type: "output",
+
+  factory: function(el, width, height) {
+    return {
+      renderValue: function(x) {
+        el.append("Hello, world!")
+      },
+      resize: function(x) {
+      }
+    };
+  }
+});
+```
+
+We can then use `htmlwidgets::createWidget` to create an instance of this widget. 
+Note the `x` argument, which is the data used as input for the widget. 
+This will usually hold the data
+that we pass into the widget, where it will be available as a JSON object. 
+I've left it empty here for simplicity.
+
+```{r, fig.height = 1, fig.width = 1}
+createWidget(
+  "hello_world",
+  x = list(),
+  package = "plotlyutils"
+)
+```
+
+A minor aside is that when developing these widgets locally (eg, loading using
+`devtools::load_all()`) you must create a symbolic link from `htmlwidgets` to
+`inst/htmlwidgets`, since the htmlwidgets library only looks in the root
+of the package directory for the files it needs. You should add this link
+to your `.Rbuildignore` in order to pass R CMD check.
+
+## Something more familiar
+
+What if I wanted to say hello to Edinbr too? I guess I could
+just copy the previous to `inst/htmlwidgets/hello_edinbr.yaml` and modify it, 
+but it would be better to 
+use a shared dependency. A simple function 
+to say hello that we can call from any widget. We define dependencies
+in a YAML configuration file, in this case `inst/htmlwidgets/hello_edinbr.yaml`
+
+```{yaml, eval=FALSE}
+dependencies:
+  - name: hello
+    version: 0.0.0
+    src: htmlwidgets/lib/hello/
+    script: 
+      - hello.js
+    stylesheet: hello.css
+```
+Where hello.js is a file containing a simple function:
+
+```{javascript, eval=FALSE}
+function hello(el, where) {
+    el.append("Hello, " + where + "!");
+}
+```
+that we call from 
+```{javascript, eval=FALSE}
+renderValue: function(x) {
+  hello(el, "Edinbr")
+}
+```
+
+```{r, fig.height = 1, fig.width = 1}
+createWidget(
+  "hello_edinbr",
+  x = list(),
+  package = "plotlyutils"
+)
+```
+
+
+
+# Towards a better network plot
+
+The networkD3 plot I showed earlier is great and has very good interactive 
+elements. What if I wanted some interactivity not implemented by networkD3. 
+For example, I could imagine interactively filtering the network based on how 
+many mentions each node received, to restrict the network to only those 
+mentioned often. Below is a simple d3-based htmlwidget which 
+does exactly that.
+
+```{r}
+createWidget(
+  "twitternetwork",
+  x = graph_data,
+  sizingPolicy = sizingPolicy(
+    browser.fill = TRUE, 
+    viewer.fill = TRUE
+  ),
+  package = "plotlyutils"
+)
+```
+
+
+# Linked scatter plot
+
+In "omics" data, we often represent the results of models applied to many 
+features in the form of a scatter plot of `-log10(p-value)` against 
+`log2(effect size)` (eg, fold change). These are known as volcano plots.
+However, given that there are typically tens or hundreds of thousands
+of points with obscure names, it can be difficult to derive meaning from
+these plots (unless your "favourite gene" comes out on top, of course).
+We can create a simple scatter plot which links to more information about
+each feature.
+
+```{r}
+suppressPackageStartupMessages({
+  library("plotlyutils")
+  library("plotly")
+})
+
+set.seed(42)
+tt <- GBMtopTable[sample(seq_len(nrow(GBMtopTable)), 1000), ]
+title <- "Glioblastoma - IDH1 mutant vs wt"
+xtitle <- "log<sub>2</sub>(fold-change)"
+ytitle <- "-log<sub>10</sub>(FDR-adjusted p-value)"
+colours <- c("#0000ff", "#000000", "#ff0000")
+linked_scatter_plot(
+    x = tt[["logFC"]],
+    xlab = xtitle,
+    y = -log10(tt[["adj.P.Val"]]),
+    ylab = ytitle,
+    xlim = c(-max(abs(tt[["logFC"]])), max(abs(tt[["logFC"]]))) * 1.1,
+    text = tt[["Text"]],
+    links = tt[["Links"]],
+    groups = tt[["Group"]],
+    title = title,
+    colours = colours)
+```
+
+# Scatter plot with dropdown menus
+
+Another great example use case is when you have too much data to easily show 
+at once. For example, with "omics" data it is common to examine the first
+nth principal components to evaluate data quality, batch effects, etc.
+This can be laborious, and when presenting such data the probability is 
+asymptotically one that you will be asked "What about later PCs?" or 
+"What about factor X with PC Y?".
+
+The following example shows what this process might look like with base R,
+followed by a similar exploration using a htmlwidget I wrote.
+
+```{r}
+suppressPackageStartupMessages({
+    library("plotlyutils")
+    library("SummarizedExperiment")
+    library("limma")
+})
+pcs <- prcomp(t(voomed_GBM$E))
+pc_data <- pcs$x
+
+columns <- c(
+    "subtype_IDH.status",
+    "subtype_Age..years.at.diagnosis.",
+    "subtype_Gender",
+    "subtype_Pan.Glioma.RNA.Expression.Cluster",
+    "ethnicity"
+)
+colours <- colData(GBMdata)[, columns, drop = FALSE]
+colours <- as.data.frame(colours)
+colnames(colours) <- gsub("subtype_", "", colnames(colours))
+colours$TotalReads <- colSums(assay(GBMdata))
+
+
+plot(
+    pc_data[, 1], 
+    pc_data[, 2], 
+    col = as.factor(colours[[1]]),
+    pch = 16,
+    xlab = "PC1",
+    ylab = "PC2")
+legend(
+    max(pc_data[, 1]) * 0.7,
+    max(pc_data[, 2]) * 0.7,
+    unique(colours[[1]]),
+    pch = 16,
+    col = unique(colours[[1]]))
+
+```
+...and so on until you are sick of typing.
+
+Alternatively, we could write a htmlwidget that allows us or others to explore
+the data.
+
+```{r}
+selectable_scatter_plot(pc_data, colours)
+```
+
+
+# Other frameworks
+
+People generally use Shiny for interactive web apps with R. So why have I 
+focused on htmlwidgets?
+
+Shiny is great, but it requires an R backend. This is fine for interactive use, 
+but for sharing with others, it means that they must have R installed. Further,
+in order to host it on a website, that website must have R installed,
+which is in many cases not feasible due to restrictions on installed software.
+Even when it is possible to install R, it may not be desirable, as this adds 
+more maintenance (eg, checking)
+
+Further, htmlwidgets can be used within a Shiny app, alongside
+base graphics, tables, etc. This allows for several layers of interactivity.
+
+htmlwidgets can also be linked together using the 
+[Crosstalk](https://rstudio.github.io/crosstalk/) framework. This defines a way
+of sharing data between widgets, allowing shared selection events and other rich 
+interactivity. This framework can (as far as I know) also be used within Shiny,
+so you can build very deep apps or dashboards to allow you or others to interact
+with data outside of the confines of the R console.
+
+
+# Closing
+
+Thank you for taking the time to read this, or for attending this talk. 
+Feel free to look at related work on
+[my blog](https://alanocallaghan.github.io/),
+in my [plotlyutils R package](https://github.com/Alanocallaghan/plotlyutils/)
+or in the 
+[vignettes I wrote for a talk relating to that package](https://alanocallaghan.github.io/plotlyvignettes/).

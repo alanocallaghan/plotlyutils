@@ -1,4 +1,3 @@
-var s
 function twitternetwork(x, el) {
 
   var d3 = Plotly.d3;
@@ -53,7 +52,7 @@ function twitternetwork(x, el) {
 
   var axisScale = d3.scale.linear()
     .domain([0, max])
-    .range([0, slidecontainer[0][0].clientWidth]);
+    .range([10, slidecontainer[0][0].clientWidth - 10]);
   var axis = d3.svg.axis()
     .scale(axisScale)
     .tickFormat(function(d) {
@@ -78,11 +77,10 @@ function twitternetwork(x, el) {
 
   var svg = d3.select("#" + el.id).append("svg")
     .attr("width", el.clientWidth)
-    .attr("height", el.clientHeight)
-    .attr("id", "mysvg");
+    .attr("height", el.clientHeight);
 
   var force = d3.layout.force()
-    .gravity(0.05)
+    .gravity(0.03)
     .distance(100)
     .charge(-50)
     .size([el.clientWidth, el.clientHeight])

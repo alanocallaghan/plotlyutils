@@ -7,7 +7,7 @@ HTMLWidgets.widget({
   factory: function(el, width, height) {
     return {
       renderValue: function(x) {
-        hello(el, "world")
+        el.append("Hello, world!")
       },
       resize: function(x) {
       }
