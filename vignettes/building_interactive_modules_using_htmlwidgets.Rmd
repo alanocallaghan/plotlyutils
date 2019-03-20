@@ -2,8 +2,8 @@
 title: Building interactive modules using htmlwidgets
 output:
   html_document:
-    fig_width: 12
-    fig_height: 8
+    fig_width: 9
+    fig_height: 6
     code_folding: hide
     toc: yes
 ---
@@ -330,6 +330,8 @@ This will usually hold the data
 that we pass into the widget, where it will be available as a JSON object. 
 I've left it empty here for simplicity.
 
+The result:
+
 ```{r, fig.height = 1, fig.width = 1}
 createWidget(
   "hello_world",
@@ -369,12 +371,15 @@ function hello(el, where) {
     el.append("Hello, " + where + "!");
 }
 ```
-that we call from 
+that we call from `inst/htmlwidgets/hello_edinbr.js`:
 ```{javascript, eval=FALSE}
+[...]
 renderValue: function(x) {
   hello(el, "Edinbr")
 }
+[...]
 ```
+The result:
 
 ```{r, fig.height = 1, fig.width = 1}
 createWidget(
@@ -510,10 +515,11 @@ focused on htmlwidgets?
 
 Shiny is great, but it requires an R backend. This is fine for interactive use, 
 but for sharing with others, it means that they must have R installed. Further,
-in order to host it on a website, that website must have R installed,
+in order to host it on a website, the web server must have R installed,
 which is in many cases not feasible due to restrictions on installed software.
 Even when it is possible to install R, it may not be desirable, as this adds 
-more maintenance (eg, checking)
+more maintenance (eg, ensuring correct & consistent package versions) and
+possibly security concerns.
 
 Further, htmlwidgets can be used within a Shiny app, alongside
 base graphics, tables, etc. This allows for several layers of interactivity.
