@@ -33,8 +33,6 @@ function selectable_scatter_plot(data, div) {
         .append("select")
         .attr("id", "colourSelect");
 
-
-
     xSelect.on("change", function() {
         xVar = this.options[this.selectedIndex].value;
         draw();
@@ -75,11 +73,11 @@ function selectable_scatter_plot(data, div) {
             .attr("selected", colourKey == colourKeys[0] ? "selected" : undefined);
     }
 
-    var plotdiv = document.getElementById("plot");
-
+    // todo: check if this is good
+    plotdiv = plot[0][0];
+    
     function draw() {
         var colourby = colours[colourVar];
-        console.log(colours)
         if (!colourby.some(function(d) {
             return (typeof d === "string");
         })) {
