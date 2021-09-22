@@ -74,9 +74,10 @@ function selectable_scatter_plot(data, div) {
     }
 
     // todo: check if this is good
-    plotdiv = plot[0][0];
+    var plotdiv = plot[0][0];
     
     function draw() {
+        plotdiv = plot[0][0];
         var colourby = colours[colourVar];
         if (!colourby.some(function(d) {
             return (typeof d === "string");
@@ -122,7 +123,6 @@ function selectable_scatter_plot(data, div) {
             );
 
         } else {
-
             var colour = colourby.filter(onlyUnique);
             var traces = [];
             for (var value of colour) {
