@@ -28,19 +28,11 @@ test_that("dropdown lineplot works", {
 })
 
 test_that("linked scatter_plot works", {
-  tt <- GBMtopTable[sample(seq_len(nrow(GBMtopTable)), 1000), ]
   p <- linked_scatter_plot(
-    x = tt[["logFC"]],
-    xlab = "log<sub>2</sub>(fold-change)",
-    y = -log10(tt[["adj.P.Val"]]),
-    ylab = "-log<sub>10</sub>(FDR-adjusted p-value)",
-    xlim = c(-max(abs(tt[["logFC"]])), max(abs(tt[["logFC"]]))) * 1.1,
-    text = tt[["Text"]],
-    links = tt[["Links"]],
-    groups = tt[["Group"]],
-    title = "Glioblastoma - IDH1 mutant vs wt",
-    colours = c("#0000ff", "#000000", "#ff0000")
-  )
+    1:10,
+    1:10,
+    rep("https://www.google.com", 10),
+    groups = sample(letters[1:2], 10, replace=TRUE))
   expect_is(p, "htmlwidget")
 })
 

@@ -4,9 +4,11 @@
 \alias{selectable_histogram}
 \title{selectable_histogram}
 \usage{
-selectable_histogram(coords, title = "",
-  histnorm = c("probability density", "", "percent", "probability",
-  "density"))
+selectable_histogram(
+  coords,
+  title = "",
+  histnorm = c("probability density", "", "percent", "probability", "density")
+)
 }
 \arguments{
 \item{coords}{data.frame or matrix of variables 

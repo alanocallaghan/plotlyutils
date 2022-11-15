@@ -4,10 +4,19 @@
 \alias{linked_scatter_plot}
 \title{linked_scatter_plot}
 \usage{
-linked_scatter_plot(x, y, links, groups = rep("1", length(x)),
-  text = rep("", length(x)), title = "", xlab = "", xlim = range(x,
-  na.rm = TRUE) * 1.1, ylim = range(y, na.rm = TRUE) * 1.1, ylab = "",
-  colours = NULL)
+linked_scatter_plot(
+  x,
+  y,
+  links,
+  groups = rep("1", length(x)),
+  text = rep("", length(x)),
+  title = "",
+  xlab = "",
+  xlim = range(x, na.rm = TRUE) * 1.1,
+  ylim = range(y, na.rm = TRUE) * 1.1,
+  ylab = "",
+  colours = NULL
+)
 }
 \arguments{
 \item{x}{x values}

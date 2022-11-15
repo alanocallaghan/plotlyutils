@@ -4,8 +4,11 @@
 \alias{plotly_boxplot}
 \title{A boxplot with jittered points}
 \usage{
-plotly_boxplot(x, box_hoverinfo = FALSE,
-  colours = RColorBrewer::brewer.pal(ncol(x), "Paired"))
+plotly_boxplot(
+  x,
+  box_hoverinfo = FALSE,
+  colours = RColorBrewer::brewer.pal(ncol(x), "Paired")
+)
 }
 \arguments{
 \item{x}{A data.frame}
