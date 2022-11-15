@@ -51,6 +51,8 @@ function selectable_scatter_plot(data, div) {
     var colours = data.colours;
     var colourKeys = Object.keys(colours);
     var keys = Object.keys(data.coords);
+    var names = data.names;
+    console.log(names);
     var xVar = defaultX = keys[0];
     var yVar = defaultY = keys[1];
     var colourVar = colourKeys[0];
@@ -85,7 +87,7 @@ function selectable_scatter_plot(data, div) {
             var hovertext = [];
             for (var i = 0; i < data.coords[xVar].length; i++) {
                 hovertext.push(
-                    keys[i] + "<br>" +
+                    names[i] + "<br>" +
                     xVar + ": " + data.coords[xVar][i] + "<br>" +
                     yVar + ": " + data.coords[yVar][i] + "<br>" +
                     colourVar + ": " + colourby[i]
@@ -137,7 +139,7 @@ function selectable_scatter_plot(data, div) {
                         yVals.push(data.coords[yVar][i]);
                         indices.push(i);
                         hovertext.push(
-                            keys[i] + "<br>" +
+                            names[i] + "<br>" +
                             xVar + ": " + data.coords[xVar][i] + "<br>" +
                             yVar + ": " + data.coords[yVar][i] + "<br>" +
                             colourVar + ": " + colourby[i]
@@ -176,18 +178,17 @@ function selectable_scatter_plot(data, div) {
             );
 
         }
-    }
+    };
     window.onresize = function() {
         Plotly.relayout(plotdiv, {
             'width': plotdiv.clientWidth,
             'height': plotdiv.clientHeight
         });
-    }
+    };
 
     function onlyUnique(value, index, self) {
         return self.indexOf(value) === index;
-    }
+    };
 
-    draw()
-
+    draw();
 }
