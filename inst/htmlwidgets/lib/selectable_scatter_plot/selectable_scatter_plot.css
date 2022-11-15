@@ -1,11 +1,11 @@
 select {
     -webkit-appearance: none;
     -moz-appearance: none;
+    appearance: none;
     background-position: right 50%;
     background-repeat: no-repeat;
     background: transparent;
     padding: 5px;
-
     padding-right: 1.5em;
     font-family: Helvetica, Arial, sans-serif;
 }
@@ -22,7 +22,6 @@ span {
 #inner {
     height: 100%;
 }
-
 
 #plot {
     width: 90%;
