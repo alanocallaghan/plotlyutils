@@ -1,7 +1,5 @@
 function selectable_histogram(data, div) {
 
-    const d3 = Plotly.d3;
-
     var inner = d3.select("#" + div.id)
         .append("div")
         .attr("id", "inner");
@@ -38,7 +36,7 @@ function selectable_histogram(data, div) {
             .attr("selected", key == defaultX ? "selected": undefined);
     }
 
-    var plotdiv = document.getElementById("plot");
+    var plotdiv = plot._groups[0][0];
 
     function draw() {
 

@@ -1,6 +1,6 @@
 Package: plotlyutils
 Title: Some utility functions for plotly
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: person("Alan", "O'Callaghan", 
     email = "alan.ocallaghan@outlook.com",
     role = c("aut", "cre"))

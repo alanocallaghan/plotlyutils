@@ -1,2 +1,2 @@
 latest:
-	wget https://cdn.plot.ly/plotly-latest.min.js -O plotly-latest.min.js
+	wget https://cdn.plot.ly/plotly-2.16.3.js -O plotly.min.js

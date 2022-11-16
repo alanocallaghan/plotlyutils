@@ -1,7 +1,5 @@
 function selectable_scatter_plot(data, div) {
 
-    const d3 = Plotly.d3;
-
     var inner = d3.select("#" + div.id)
         .append("div")
         .attr("id", "inner");
@@ -52,7 +50,6 @@ function selectable_scatter_plot(data, div) {
     var colourKeys = Object.keys(colours);
     var keys = Object.keys(data.coords);
     var names = data.names;
-    console.log(names);
     var xVar = defaultX = keys[0];
     var yVar = defaultY = keys[1];
     var colourVar = colourKeys[0];
@@ -76,10 +73,9 @@ function selectable_scatter_plot(data, div) {
     }
 
     // todo: check if this is good
-    var plotdiv = plot[0][0];
+    var plotdiv = plot._groups[0][0];
     
     function draw() {
-        plotdiv = plot[0][0];
         var colourby = colours[colourVar];
         if (!colourby.some(function(d) {
             return (typeof d === "string");

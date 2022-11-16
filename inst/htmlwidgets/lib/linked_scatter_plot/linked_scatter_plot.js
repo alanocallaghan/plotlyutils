@@ -1,5 +1,5 @@
 function linked_scatter_plot(x, el) {
-    d3el = Plotly.d3.select("#" + el.id);
+    d3el = d3.select("#" + el.id);
 
     var groups = x.groups.filter(onlyUnique);
     groups.sort();

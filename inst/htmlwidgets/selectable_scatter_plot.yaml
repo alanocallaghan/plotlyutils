@@ -3,7 +3,12 @@ dependencies:
     version: 0.0.0
     src: htmlwidgets/lib/plotly/
     script: 
-      - plotly-latest.min.js
+      - plotly.min.js
+  - name: d3
+    version: 0.0.0
+    src: htmlwidgets/lib/d3/
+    script: 
+      - d3.min.js
   - name: selectable_scatter_plot
     version: 0.1.0
     src: htmlwidgets/lib/selectable_scatter_plot
