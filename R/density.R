@@ -15,11 +15,8 @@
 #' plotly_density(iris[, -5], 
 #'    title = "Density plot of Iris dataset",
 #'    xlab = "Value")
-#'
-#' plotly_density(
-#'    voomed_GBM$E, 
-#'    title = "Density plot of voomed GBM data",
-#'    xlab = "Expression level")
+#' mat <- matrix(rnorm(10000), ncol = 10)
+#' plotly_density(mat)
 #' @importFrom magrittr %>%
 #' @importFrom plotly plot_ly layout config
 #' @export
