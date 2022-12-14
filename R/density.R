@@ -3,16 +3,16 @@
 #' Creates a density plot of all columns of a matrix or data.frame like
 #' structure.
 #'
-#' @param mat Matrix for column-wise kernel density estimate curves
-#' @param title Plot title
-#' @param xlab X axis label
-#' @param palette Colour palette function 
-#' (function that returns valid colour values, eg `rainbow`
-#' 
+#' @param mat Matrix for column-wise kernel density estimate curves.
+#' @param title Plot title.
+#' @param xlab X axis label.
+#' @param palette Colour palette function
+#' (function that returns valid colour values, eg `rainbow`).
+#'
 #' @return A plotly htmlwidget
 #'
 #' @examples
-#' plotly_density(iris[, -5], 
+#' plotly_density(iris[, -5],
 #'    title = "Density plot of Iris dataset",
 #'    xlab = "Value")
 #' mat <- matrix(rnorm(10000), ncol = 10)
@@ -21,47 +21,50 @@
 #' @importFrom plotly plot_ly layout config
 #' @export
 plotly_density <- function(
-    mat, 
-    title = "", 
-    xlab = "",
-    palette = viridis) {
+        mat,
+        title = "",
+        xlab = "",
+        palette = viridis
+    ) {
 
-  assert_that(inherits(mat, "matrix") || inherits(mat, "data.frame"))
+    mat <- as.data.frame(mat)
 
-  if (is.null(colnames(mat))) colnames(mat) <- seq_len(ncol(mat))
-  densities <- lapply(seq_len(ncol(mat)), function(i) {
-    stats::density(mat[, i, drop = TRUE])
-  })
-
-  coords <- lapply(
-    seq_len(ncol(mat)),
-    function(i) {
-      data.frame(
-        Sample = colnames(mat)[i],
-        x = densities[[i]][["x"]],
-        y = densities[[i]][["y"]]
-      )
+    if (is.null(colnames(mat))) {
+        colnames(mat) <- seq_len(ncol(mat))
     }
-  )
+    densities <- lapply(seq_len(ncol(mat)), function(i) {
+        stats::density(mat[, i, drop = TRUE])
+    })
 
-  plot_ly(
-    do.call(rbind, coords),
-    x = ~x,
-    y = ~y,
-    color = ~Sample,
-    text = ~paste0(
-      "Sample: ", Sample, "<br>",
-      "x: ", x, "<br>",
-      "Density: ", y
-    ),
-    hoverinfo = "text",
-    colors = palette(ncol(mat)),
-    type = "scatter",
-    mode = "lines"
-  ) %>% layout(
-    title = title,
-    hovermode = "closest",
-    xaxis = list(title = xlab),
-    yaxis = list(title = "Density")
-  )
+    coords <- lapply(
+        seq_len(ncol(mat)),
+        function(i) {
+            data.frame(
+                Sample = colnames(mat)[i],
+                x = densities[[i]][["x"]],
+                y = densities[[i]][["y"]]
+            )
+        }
+    )
+
+    plot_ly(
+        do.call(rbind, coords),
+        x = ~x,
+        y = ~y,
+        color = ~Sample,
+        text = ~paste0(
+          "Sample: ", Sample, "<br>",
+          "x: ", x, "<br>",
+          "Density: ", y
+        ),
+        hoverinfo = "text",
+        colors = palette(ncol(mat)),
+        type = "scatter",
+        mode = "lines"
+    ) %>% layout(
+        title = title,
+        hovermode = "closest",
+        xaxis = list(title = xlab),
+        yaxis = list(title = "Density")
+    )
 }

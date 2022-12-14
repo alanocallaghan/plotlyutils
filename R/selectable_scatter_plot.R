@@ -18,29 +18,31 @@
 #' @importFrom assertthat assert_that
 #' @export
 selectable_scatter_plot <- function(
-    coords,
-    colours,
-    title = "") {
+        coords,
+        colours,
+        title = ""
+    ) {
 
-  assert_that(
-    inherits(coords, "matrix") || inherits(coords, "data.frame"),
-    inherits(colours, "data.frame"),
-    nrow(coords) == nrow(colours)
-  )
-  coords <- as.data.frame(coords)
-  colours <- as.data.frame(colours)
+    assert_that(
+        inherits(coords, "matrix") || inherits(coords, "data.frame"),
+        inherits(colours, "data.frame"),
+        nrow(coords) == nrow(colours)
+    )
+    coords <- as.data.frame(coords)
+    colours <- as.data.frame(colours)
 
-  createWidget(
-    "selectable_scatter_plot",
-    x = list(
-      coords = coords,
-      colours = colours,
-      names = rownames(coords),
-      title = title
-    ),
-    sizingPolicy = sizingPolicy(
-      browser.fill = TRUE, 
-      viewer.fill = TRUE),
-    package = "plotlyutils"
-  )
+    createWidget(
+        "selectable_scatter_plot",
+        x = list(
+            coords = coords,
+            colours = colours,
+            names = rownames(coords),
+            title = title
+        ),
+        sizingPolicy = sizingPolicy(
+            browser.fill = TRUE,
+            viewer.fill = TRUE
+        ),
+        package = "plotlyutils"
+    )
 }
