@@ -1,7 +1,9 @@
 #' selectable_scatter_plot
 #'
-#' A scatterplot with dropdown menus to select the x/y variables and
-#' the variable used to colour the points
+#' A scatterplot with dropdown menus to select both the x & y variables and
+#' the variable used to colour the points.
+#' @param mat Matrix to calculate PCs.
+#' @param df \code{data.frame} of covariates to associate with PCs of \code{mat}.
 #' @param coords data.frame or matrix of point co-ordinates
 #' Each column will be an entry in the X and Y drop-down menus
 #' @param colours data.frame of variables used to colour points
@@ -16,6 +18,7 @@
 #'   "Interactive PCA plot"
 #' )
 #' @importFrom assertthat assert_that
+#' @rdname selectable_scatter_plot
 #' @export
 selectable_scatter_plot <- function(
         coords,
@@ -30,7 +33,6 @@ selectable_scatter_plot <- function(
     )
     coords <- as.data.frame(coords)
     colours <- as.data.frame(colours)
-
     createWidget(
         "selectable_scatter_plot",
         x = list(
@@ -45,4 +47,17 @@ selectable_scatter_plot <- function(
         ),
         package = "plotlyutils"
     )
+}
+
+#' @export
+#' @rdname selectable_scatter_plot
+pca_selectable_scatter_plot <- function(mat, df) {
+    pc <- prcomp(mat)
+    pcs <- pc$x
+    # calculate variance explained
+    eigs <- (b$sdev^2)[seq_len(npcs)]
+    varexp <- eigs / sum(eigs)
+    colnames(pcs) <- paste0(colnames(pcs), " (", varexp, "%)")
+    df <- df[, order(colnames(df))]
+    selectable_scatter_plot(pcs, df)
 }

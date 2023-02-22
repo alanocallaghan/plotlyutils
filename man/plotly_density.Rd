@@ -7,14 +7,14 @@
 plotly_density(mat, title = "", xlab = "", palette = viridis)
 }
 \arguments{
-\item{mat}{Matrix for column-wise kernel density estimate curves}
+\item{mat}{Matrix for column-wise kernel density estimate curves.}
 
-\item{title}{Plot title}
+\item{title}{Plot title.}
 
-\item{xlab}{X axis label}
+\item{xlab}{X axis label.}
 
-\item{palette}{Colour palette function 
-(function that returns valid colour values, eg `rainbow`}
+\item{palette}{Colour palette function
+(function that returns valid colour values, eg `rainbow`).}
 }
 \value{
 A plotly htmlwidget
@@ -24,7 +24,7 @@ Creates a density plot of all columns of a matrix or data.frame like
 structure.
 }
 \examples{
-plotly_density(iris[, -5], 
+plotly_density(iris[, -5],
    title = "Density plot of Iris dataset",
    xlab = "Value")
 mat <- matrix(rnorm(10000), ncol = 10)

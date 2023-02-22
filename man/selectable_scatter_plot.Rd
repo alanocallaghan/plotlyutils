@@ -2,9 +2,12 @@
 % Please edit documentation in R/selectable_scatter_plot.R
 \name{selectable_scatter_plot}
 \alias{selectable_scatter_plot}
+\alias{pca_selectable_scatter_plot}
 \title{selectable_scatter_plot}
 \usage{
 selectable_scatter_plot(coords, colours, title = "")
+
+pca_selectable_scatter_plot(mat, df)
 }
 \arguments{
 \item{coords}{data.frame or matrix of point co-ordinates
@@ -13,10 +16,14 @@ Each column will be an entry in the X and Y drop-down menus}
 \item{colours}{data.frame of variables used to colour points}
 
 \item{title}{Plot title}
+
+\item{mat}{Matrix to calculate PCs.}
+
+\item{df}{\code{data.frame} of covariates to associate with PCs of \code{mat}.}
 }
 \description{
-A scatterplot with dropdown menus to select the x/y variables and
-the variable used to colour the points
+A scatterplot with dropdown menus to select both the x & y variables and
+the variable used to colour the points.
 }
 \examples{
 pcs <- prcomp(mtcars)

@@ -2,6 +2,7 @@
 
 export(dropdown_lineplot)
 export(linked_scatter_plot)
+export(pca_selectable_scatter_plot)
 export(plotly_boxplot)
 export(plotly_density)
 export(selectable_histogram)

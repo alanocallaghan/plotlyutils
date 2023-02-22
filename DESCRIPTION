@@ -1,6 +1,6 @@
 Package: plotlyutils
 Title: Some utility functions for plotly
-Version: 0.1.2
+Version: 0.2.0
 Authors@R: person("Alan", "O'Callaghan", 
     email = "alan.ocallaghan@outlook.com",
     role = c("aut", "cre"))
@@ -37,4 +37,4 @@ Suggests:
     ggplot2,
     covr
 VignetteBuilder: knitr
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3

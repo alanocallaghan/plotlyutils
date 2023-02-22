@@ -2,7 +2,7 @@
 % Please edit documentation in R/lineplot.R
 \name{dropdown_lineplot}
 \alias{dropdown_lineplot}
-\title{A line plot with selectable y variables}
+\title{A line plot with selectable y variables.}
 \usage{
 dropdown_lineplot(df, x, yvars)
 }
@@ -17,7 +17,7 @@ dropdown_lineplot(df, x, yvars)
 A plotly object
 }
 \description{
-A line plot with selectable y variables
+A line plot with selectable y variables.
 }
 \examples{
 set.seed(42)

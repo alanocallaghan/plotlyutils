@@ -5,13 +5,13 @@
 \title{selectable_histogram}
 \usage{
 selectable_histogram(
-  coords,
+  vars,
   title = "",
   histnorm = c("probability density", "", "percent", "probability", "density")
 )
 }
 \arguments{
-\item{coords}{data.frame or matrix of variables 
+\item{vars}{data.frame or matrix of variables
 (each column will be a separate histogram).}
 
 \item{title}{Plot title}
