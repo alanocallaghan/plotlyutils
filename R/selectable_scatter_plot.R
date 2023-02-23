@@ -54,9 +54,13 @@ selectable_scatter_plot <- function(
 pca_selectable_scatter_plot <- function(mat, df) {
     pc <- prcomp(mat)
     pcs <- pc$x
+
     # calculate variance explained
-    eigs <- (b$sdev^2)[seq_len(npcs)]
+    eigs <- (pc$sdev^2)
     varexp <- eigs / sum(eigs)
+    varexp <- round(varexp * 100, digits = 1)
+
+    # add to x/y labels
     colnames(pcs) <- paste0(colnames(pcs), " (", varexp, "%)")
     df <- df[, order(colnames(df))]
     selectable_scatter_plot(pcs, df)
