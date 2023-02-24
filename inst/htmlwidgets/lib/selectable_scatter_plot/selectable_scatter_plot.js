@@ -52,7 +52,10 @@ function selectable_scatter_plot(data, div) {
     var names = data.names;
     var xVar = defaultX = keys[0];
     var yVar = defaultY = keys[1];
-    var colourVar = colourKeys[0];
+    var colourVar = colourKeys[0];;
+    if (data.select_first !== undefined) {
+        colourVar = data.select_first;
+    }
 
     for (var key of keys) {
         var option = xSelect.append("option")
@@ -69,7 +72,7 @@ function selectable_scatter_plot(data, div) {
         var option = colourSelect.append("option")
             .text(colourKey)
             .attr("value", colourKey)
-            .attr("selected", colourKey == colourKeys[0] ? "selected" : undefined);
+            .attr("selected", colourKey == colourVar ? "selected" : undefined);
     }
 
     // todo: check if this is good

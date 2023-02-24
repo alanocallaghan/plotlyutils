@@ -7,7 +7,9 @@
 #' @param coords data.frame or matrix of point co-ordinates
 #' Each column will be an entry in the X and Y drop-down menus
 #' @param colours data.frame of variables used to colour points
-#' @param title Plot title
+#' @param select_first Variable to use as default colour when plot is loaded.
+#' @param title Plot title.
+#' @param ... Passed to \code{\link{selectable_scatter_plot}}.
 #' @examples
 #' pcs <- prcomp(mtcars)
 #' colours <- mtcars[, c("cyl", "vs", "am", "gear", "carb")]
@@ -23,7 +25,8 @@
 selectable_scatter_plot <- function(
         coords,
         colours,
-        title = ""
+        title = "",
+        select_first = NULL
     ) {
 
     assert_that(
@@ -33,13 +36,15 @@ selectable_scatter_plot <- function(
     )
     coords <- as.data.frame(coords)
     colours <- as.data.frame(colours)
+    stopifnot(select_first %in% colnames(colours))
     createWidget(
         "selectable_scatter_plot",
         x = list(
             coords = coords,
             colours = colours,
             names = rownames(coords),
-            title = title
+            title = title,
+            select_first = select_first
         ),
         sizingPolicy = sizingPolicy(
             browser.fill = TRUE,
@@ -51,7 +56,7 @@ selectable_scatter_plot <- function(
 
 #' @export
 #' @rdname selectable_scatter_plot
-pca_selectable_scatter_plot <- function(mat, df) {
+pca_selectable_scatter_plot <- function(mat, df, ...) {
     pc <- prcomp(mat)
     pcs <- pc$x
 
@@ -63,5 +68,5 @@ pca_selectable_scatter_plot <- function(mat, df) {
     # add to x/y labels
     colnames(pcs) <- paste0(colnames(pcs), " (", varexp, "%)")
     df <- df[, order(colnames(df))]
-    selectable_scatter_plot(pcs, df)
+    selectable_scatter_plot(pcs, df, ...)
 }

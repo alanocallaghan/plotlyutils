@@ -5,9 +5,9 @@
 \alias{pca_selectable_scatter_plot}
 \title{selectable_scatter_plot}
 \usage{
-selectable_scatter_plot(coords, colours, title = "")
+selectable_scatter_plot(coords, colours, title = "", select_first = NULL)
 
-pca_selectable_scatter_plot(mat, df)
+pca_selectable_scatter_plot(mat, df, ...)
 }
 \arguments{
 \item{coords}{data.frame or matrix of point co-ordinates
@@ -15,11 +15,15 @@ Each column will be an entry in the X and Y drop-down menus}
 
 \item{colours}{data.frame of variables used to colour points}
 
-\item{title}{Plot title}
+\item{title}{Plot title.}
+
+\item{select_first}{Variable to use as default colour when plot is loaded.}
 
 \item{mat}{Matrix to calculate PCs.}
 
 \item{df}{\code{data.frame} of covariates to associate with PCs of \code{mat}.}
+
+\item{...}{Passed to \code{\link{selectable_scatter_plot}}.}
 }
 \description{
 A scatterplot with dropdown menus to select both the x & y variables and
