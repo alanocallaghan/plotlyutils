@@ -5,6 +5,8 @@ Status](https://travis-ci.org/Alanocallaghan/plotlyutils.png?branch=master)](htt
 plotlyutils
 ===========
 
+**This package is archived, functionality will be transferred to a more general datavis package.**
+
 This package contains some utility functions and htmlwidgets for
 [plotly](https://plot.ly/), and a related talk (see vignettes in the
 [vignettes package](https://alanocallaghan.github.io/plotlyvignettes/) (built
@@ -14,3 +16,4 @@ Installation
 ============
 
     devtools::install_github("Alanocallaghan/plotlyutils")
+
