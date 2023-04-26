@@ -53,7 +53,7 @@ function selectable_scatter_plot(data, div) {
     var xVar = defaultX = keys[0];
     var yVar = defaultY = keys[1];
     var colourVar = colourKeys[0];;
-    if (data.select_first !== undefined) {
+    if (data.select_first) {
         colourVar = data.select_first;
     }
 
